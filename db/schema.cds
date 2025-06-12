@@ -58,8 +58,7 @@ entity PlatformType : CodeList {
 
 // --- Core Domain Entities ---
 
-entity MovieProject : managed {
-  key ID           : UUID;
+entity MovieProject : managed, cuid {
       title        : String(200);
       status       : Association to ProjectStatus;
       releaseDate  : Date;
@@ -68,8 +67,7 @@ entity MovieProject : managed {
       director     : Association to Person;
 }
 
-entity Person : managed {
-  key ID           : UUID;
+entity Person : managed, cuid {
       name         : String(100);
       role         : Association to PersonRole;
       birthDate    : Date;
@@ -77,32 +75,28 @@ entity Person : managed {
       contactInfo  : String(255);
 }
 
-entity Casting : managed {
-  key ID           : UUID;
+entity Casting : managed, cuid {
       movie        : Association to MovieProject;
       person       : Association to Person;
       characterName: String(100);
       isLeadRole   : Boolean;
 }
 
-entity CrewAssignment : managed {
-  key ID           : UUID;
+entity CrewAssignment : managed, cuid {
       movie        : Association to MovieProject;
       person       : Association to Person;
       department   : Association to Department;
       roleDescription : String(100);
 }
 
-entity Location : managed {
-  key ID           : UUID;
+entity Location : managed, cuid {
       name         : String(100);
       address      : String(255);
       contactPerson: String(100);
       availability : Association to AvailabilityStatus;
 }
 
-entity Asset : managed {
-  key ID           : UUID;
+entity Asset : managed, cuid {
       movie        : Association to MovieProject;
       type         : Association to AssetType;
       name         : String(100);
@@ -110,8 +104,7 @@ entity Asset : managed {
       location     : String(255);
 }
 
-entity Expense : managed {
-  key ID           : UUID;
+entity Expense : managed, cuid {
       movie        : Association to MovieProject;
       category     : Association to ExpenseCategory;
       amount       : Decimal(15,2);
@@ -119,8 +112,7 @@ entity Expense : managed {
       description  : String(255);
 }
 
-entity Contract : managed {
-  key ID           : UUID;
+entity Contract : managed, cuid {
       person       : Association to Person;
       movie        : Association to MovieProject;
       type         : Association to ContractType;
@@ -129,8 +121,7 @@ entity Contract : managed {
       terms        : String(1000);
 }
 
-entity DistributionRight : managed {
-  key ID           : UUID;
+entity DistributionRight : managed, cuid {
       movie        : Association to MovieProject;
       region       : String(100);
       platform     : Association to PlatformType;
@@ -138,8 +129,7 @@ entity DistributionRight : managed {
       endDate      : Date;
 }
 
-entity FileAttachment : managed {
-  key ID           : UUID;
+entity FileAttachment : managed, cuid {
       entity       : String(100);
       entity_ID    : UUID;
       fileName     : String(255);
@@ -147,8 +137,7 @@ entity FileAttachment : managed {
       url          : String(500);
 }
 
-entity ProductionStatusLog : managed {
-  key ID           : UUID;
+entity ProductionStatusLog : managed, cuid {
       movie        : Association to MovieProject;
       status       : Association to ProjectStatus;
       timestamp    : DateTime;
