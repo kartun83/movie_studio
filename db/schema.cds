@@ -58,16 +58,24 @@ entity PlatformType : CodeList {
 
 // --- Core Domain Entities ---
 
-entity MovieProject : managed, cuid {
+entity MovieProject : cuid, managed {
       title        : String(200);
       status       : Association to ProjectStatus;
       releaseDate  : Date;
       budget       : Decimal(15,2);
       genre        : String(100);
       director     : Association to Person;
+      expenses      : Association to many Expense on expenses.movie = $self;
+      castings      : Association to many Casting on castings.movie = $self;
+      crewAssignments : Association to many CrewAssignment on crewAssignments.movie = $self;
+      distributionRights : Association to many DistributionRight on distributionRights.movie = $self;
+      assets        : Association to many Asset on assets.movie = $self;
+      contracts     : Association to many Contract on contracts.movie = $self;
+      productionStatusLogs : Association to many ProductionStatusLog on productionStatusLogs.movie = $self;
+      // fileAttachments : Association to many FileAttachment on fileAttachments.entity_ID = $self;
 }
 
-entity Person : managed, cuid {
+entity Person : cuid, managed {
       name         : String(100);
       role         : Association to PersonRole;
       birthDate    : Date;
@@ -75,28 +83,28 @@ entity Person : managed, cuid {
       contactInfo  : String(255);
 }
 
-entity Casting : managed, cuid {
+entity Casting : cuid, managed {
       movie        : Association to MovieProject;
       person       : Association to Person;
       characterName: String(100);
       isLeadRole   : Boolean;
 }
 
-entity CrewAssignment : managed, cuid {
+entity CrewAssignment : cuid, managed {
       movie        : Association to MovieProject;
       person       : Association to Person;
       department   : Association to Department;
       roleDescription : String(100);
 }
 
-entity Location : managed, cuid {
+entity Location : cuid, managed {
       name         : String(100);
       address      : String(255);
       contactPerson: String(100);
       availability : Association to AvailabilityStatus;
 }
 
-entity Asset : managed, cuid {
+entity Asset : cuid, managed {
       movie        : Association to MovieProject;
       type         : Association to AssetType;
       name         : String(100);
@@ -104,7 +112,7 @@ entity Asset : managed, cuid {
       location     : String(255);
 }
 
-entity Expense : managed, cuid {
+entity Expense : cuid, managed {
       movie        : Association to MovieProject;
       category     : Association to ExpenseCategory;
       amount       : Decimal(15,2);
@@ -112,7 +120,7 @@ entity Expense : managed, cuid {
       description  : String(255);
 }
 
-entity Contract : managed, cuid {
+entity Contract : cuid, managed {
       person       : Association to Person;
       movie        : Association to MovieProject;
       type         : Association to ContractType;
@@ -121,7 +129,7 @@ entity Contract : managed, cuid {
       terms        : String(1000);
 }
 
-entity DistributionRight : managed, cuid {
+entity DistributionRight : cuid, managed {
       movie        : Association to MovieProject;
       region       : String(100);
       platform     : Association to PlatformType;
@@ -129,7 +137,7 @@ entity DistributionRight : managed, cuid {
       endDate      : Date;
 }
 
-entity FileAttachment : managed, cuid {
+entity FileAttachment : cuid, managed {
       entity       : String(100);
       entity_ID    : UUID;
       fileName     : String(255);
@@ -137,9 +145,24 @@ entity FileAttachment : managed, cuid {
       url          : String(500);
 }
 
-entity ProductionStatusLog : managed, cuid {
+entity ProductionStatusLog : cuid, managed {
       movie        : Association to MovieProject;
       status       : Association to ProjectStatus;
       timestamp    : DateTime;
       comment      : String(500);
+}
+
+// --- View and Projection ---
+
+// View: Total Expense per Movie
+view ExpenseSummary as select from Expense {
+  movie.ID as movie_ID,
+  sum(amount) as totalAmount
+} group by movie.ID;
+
+entity MinimalMovieInfo as projection on MovieProject {
+  ID,
+  title,
+  status,
+  releaseDate
 }
