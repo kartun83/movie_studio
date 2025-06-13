@@ -1,5 +1,5 @@
 namespace com.kartun.movie_studio;
-using { cuid, managed, sap.common.CodeList } from '@sap/cds/common';
+using { cuid, managed, sap.common.CodeList, Currency, Country, Language } from '@sap/cds/common';
 
 // --- CodeLists with i18n support ---
 @cds.odata.valuelist
@@ -56,6 +56,14 @@ entity PlatformType : CodeList {
       name : localized String(100);
 }
 
+@cds.odata.valuelist
+entity GenreType : CodeList {
+  key code : String(30);
+      name : localized String(100);
+}
+
+type EmailAddress : String @assert.format: 'email';
+
 // --- Core Domain Entities ---
 
 entity MovieProject : cuid, managed {
@@ -63,8 +71,10 @@ entity MovieProject : cuid, managed {
       status       : Association to ProjectStatus;
       releaseDate  : Date;
       budget       : Decimal(15,2);
-      genre        : String(100);
-      director     : Association to Person;
+      currency     : Currency;
+      genre_primary: Association to GenreType;
+      genre_secondary: many { kind:String; genre:Association to GenreType; };
+      director      : Association to Person;
       expenses      : Association to many Expense on expenses.movie = $self;
       castings      : Association to many Casting on castings.movie = $self;
       crewAssignments : Association to many CrewAssignment on crewAssignments.movie = $self;
@@ -81,6 +91,10 @@ entity Person : cuid, managed {
       birthDate    : Date;
       agency       : String(100);
       contactInfo  : String(255);
+      country      : Country;
+      language     : Language;
+      // Keywords many and array of are mere syntax variants with identical semantics and implementations.
+      emails  : many { kind:String; address:EmailAddress; };
 }
 
 entity Casting : cuid, managed {
@@ -116,6 +130,7 @@ entity Expense : cuid, managed {
       movie        : Association to MovieProject;
       category     : Association to ExpenseCategory;
       amount       : Decimal(15,2);
+      currency     : Currency;
       date         : Date;
       description  : String(255);
 }
@@ -159,6 +174,26 @@ view ExpenseSummary as select from Expense {
   movie.ID as movie_ID,
   sum(amount) as totalAmount
 } group by movie.ID;
+
+view ExpenseSummaryByDepartment as select from Expense
+    inner join CrewAssignment on Expense.movie.ID = CrewAssignment.movie.ID
+    inner join Department on CrewAssignment.department.code = Department.code
+{
+    Expense.movie.ID as movie,
+    Department.name as department,
+    sum(Expense.amount) as total
+}
+group by Expense.movie.ID, Department.name;
+
+view ExpenseSummaryByAssetType as select from Expense
+    inner join Asset on Expense.movie.ID = Asset.movie.ID
+    inner join AssetType on Asset.type.code = AssetType.code
+{
+    Expense.movie.ID as movie,
+    AssetType.name as assetType,
+    sum(Expense.amount) as total
+}
+group by Expense.movie.ID, AssetType.name;
 
 entity MinimalMovieInfo as projection on MovieProject {
   ID,

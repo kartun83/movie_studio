@@ -1,6 +1,7 @@
 namespace com.kartun.movie_studio.views;
 
-using {CrewAssignment, MovieProject} from './schema';
+using {com.kartun.movie_studio.db.schema};
+using { CrewAssignment, MovieProject };
 
 entity MovieDirectorView as select from  CrewAssignment {
   movie_ID,

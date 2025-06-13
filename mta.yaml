@@ -67,6 +67,11 @@ resources:
       config:
         xsappname: movie_studio-${org}-${space}
         tenant-mode: dedicated
+        oauth2-configuration:
+          redirect-uris:
+            - https://~{app-api/app-uri}/**
+    requires:
+      - name: app-api
   - name: movie_studio-db
     type: com.sap.xs.hdi-container
     parameters:
