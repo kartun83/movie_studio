@@ -62,7 +62,11 @@ entity GenreType : CodeList {
       name : localized String(100);
 }
 
-type EmailAddress : String @assert.format: 'email';
+type ContactInfo : {
+      kind:String;
+      address:String;
+}
+// type EmailAddress : String @assert.format: 'email';
 
 // --- Core Domain Entities ---
 
@@ -90,11 +94,12 @@ entity Person : cuid, managed {
       role         : Association to PersonRole;
       birthDate    : Date;
       agency       : String(100);
-      contactInfo  : String(255);
+      // contactInfo  : String(255);
+      contactInfo  : many ContactInfo;
       country      : Country;
       language     : Language;
       // Keywords many and array of are mere syntax variants with identical semantics and implementations.
-      emails  : many { kind:String; address:EmailAddress; };
+      // emails  : many { kind:String; address:EmailAddress; };
 }
 
 entity Casting : cuid, managed {
