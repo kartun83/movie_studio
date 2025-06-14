@@ -77,7 +77,7 @@ entity MovieProject : cuid, managed {
       budget       : Decimal(15,2);
       currency     : Currency;
       genre_primary: Association to GenreType;
-      genre_secondary: many { kind:String; genre:Association to GenreType; };
+      genre_secondary: many GenreType;
       director      : Association to Person;
       expenses      : Association to many Expense on expenses.movie = $self;
       castings      : Association to many Casting on castings.movie = $self;
