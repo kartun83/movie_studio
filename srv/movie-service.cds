@@ -29,5 +29,13 @@ service MovieService {
   action closeProject(
     projectId : UUID,
     finalComment : String(255)
-  ) returns Movies;    
+  ) returns Movies
+    @odata.contained: false;
+
+  entity UpcomingReleases as projection on M.MovieProject {
+    ID,
+    title,
+    releaseDate,
+    status.code as status
+  };
 }
