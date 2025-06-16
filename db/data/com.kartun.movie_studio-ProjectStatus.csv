@@ -1,0 +1,11 @@
+code,name,descr
+CONCEPT,Concept Development,
+DEVELOPMENT,Development,
+PRE_PRODUCTION,Pre-Production,
+PRODUCTION,Production,
+POST_PRODUCTION,Post-Production,
+MARKETING,Marketing & Distribution,
+RELEASED,Released,
+ON_HOLD,On Hold,
+CANCELLED,Cancelled,
+

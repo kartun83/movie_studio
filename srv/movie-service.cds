@@ -1,0 +1,33 @@
+using com.kartun.movie_studio as M from '../db/schema';
+using { Currency, cuid } from '@sap/cds/common';
+
+service MovieService {
+
+  @odata.draft.enabled: true
+  @cds.redirection.target: true
+  @assert.range: [budget, 0, 1e10]   // budget >= 0
+  entity Movies as projection on M.MovieProject {
+    ID,
+    title,
+    budget @(assert.range: [0, 1e10])
+  }
+
+  entity Persons as projection on M.Person {
+    ID,
+    name @assert.notNull
+  }
+
+  entity Castings as projection on M.Casting;
+  entity Expenses as projection on M.Expense;
+  entity Assets as projection on M.Asset;
+
+  function getTotalBudget(
+    genre : String
+  ) returns Decimal(15,2)
+    @odata.contained: false;
+
+  action closeProject(
+    projectId : UUID,
+    finalComment : String(255)
+  ) returns Movies;    
+}

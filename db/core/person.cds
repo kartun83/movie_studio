@@ -9,6 +9,7 @@ entity Person : cuid, managed {
   birthDate   : Date;
   agency      : String(100);
   contactInfo : many ContactInfo;
+//   contactInfo : array of  ContactInfo;
   country     : Country;
   language    : Language;
 }

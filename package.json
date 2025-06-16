@@ -21,11 +21,11 @@
   },
   "cds": {
     "requires": {
-      "auth": "xsuaa",
-      "connectivity": true,
-      "[production]": {
-        "auth": "xsuaa"
-      }
+      "auth": {
+        "[production]": "xsuaa",
+        "[development]": "mock"
+      },
+      "connectivity": true
     },
     "sql": {
       "native_hana_associations": false

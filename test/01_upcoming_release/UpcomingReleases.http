@@ -1,0 +1,18 @@
+# Set base URL for the service
+@baseUrl = http://localhost:4004
+
+### ------------------------------------------------------------------------
+# Get upcoming releases (no parameters - returns all in SQLite)
+GET {{baseUrl}}/service/UpcomingReleases
+
+### ------------------------------------------------------------------------
+# Get upcoming releases between two dates (for SQLite simulated filter, HANA uses params)
+GET {{baseUrl}}/service/UpcomingReleases?earliest=2025-01-01&latest=2025-12-31
+
+### ------------------------------------------------------------------------
+# Get upcoming releases in a future year with no movies
+GET {{baseUrl}}/service/UpcomingReleases?earliest=2090-01-01&latest=2090-12-31
+
+### ------------------------------------------------------------------------
+# Get upcoming releases with missing parameters (should return all in SQLite or error in HANA)
+GET {{baseUrl}}/service/UpcomingReleases?earliest=2025-01-01
