@@ -1,5 +1,5 @@
 import cds from '@sap/cds';
-import { getTransaction, SELECT } from './base-service';
+// import { getTransaction, SELECT } from './base-service';
 
 interface MovieProject {
     budget?: number;
@@ -22,7 +22,7 @@ export default class BudgetService extends cds.ApplicationService {
     }
 
     private async getTotalBudget(req: cds.Request) {
-        const { genre } = req.params as { genre: string };
+        const genre = req.params[0] as string;
         const tx = getTransaction(req);
 
         const result = await tx.run<{ total: number }>(

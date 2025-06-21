@@ -1,4 +1,4 @@
-ID,movie_ID,type_code,name,status_code,location,createdAt,createdBy,modifiedAt,modifiedBy
+ID,movie_ID,type_code,name,status_code,location_ID,createdAt,createdBy,modifiedAt,modifiedBy
 ffdd2d3e-6604-427d-aca8-c08edafb0c71,,CAMERA,Standard Camera #42,AVAILABLE,Warehouse B,2024-05-15T08:30:00Z,user_123,2024-05-15T08:30:00Z,user_123
 a1b2c3d4-5678-9012-efab-34567890abcd,MOV103,CAMERA,Professional Camera #7,IN_USE,Studio A,2024-06-10T14:15:00Z,admin_456,2024-06-10T14:15:00Z,admin_456
 c08edafb-0c71-427d-aca8-ffdd2d3e6604,,CAMERA,Portable Camera #19,MAINTENANCE,Repair Lab,2024-04-22T11:20:00Z,tech_789,2024-04-22T11:20:00Z,tech_789

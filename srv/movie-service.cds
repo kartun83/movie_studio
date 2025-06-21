@@ -1,5 +1,5 @@
 using com.kartun.movie_studio as M from '../db/schema';
-using { Currency, cuid } from '@sap/cds/common';
+// using { Currency, cuid } from '@sap/cds/common';
 
 service MovieService {
 
@@ -23,8 +23,7 @@ service MovieService {
 
   function getTotalBudget(
     genre : String
-  ) returns Decimal(15,2)
-    @odata.contained: false;
+  ) returns Decimal(15,2);
 
   action closeProject(
     projectId : UUID,

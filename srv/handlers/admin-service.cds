@@ -1,4 +1,4 @@
-using com.kartun.movie_studio as db from '../db/schema';
+using com.kartun.movie_studio as db from '../../db/schema';
 
 
 /**
@@ -10,9 +10,9 @@ service AdminService @(path: '/admin') {
     entity Assets as projection on db.Asset;
     entity Expenses as projection on db.Expense;
     entity Contracts as projection on db.Contract;
-    entity Distributions as projection on db.Distribution;
+    entity Distributions as projection on db.DistributionRight;
     // entity ProductionLogs as projection on db.ProductionLog;
     entity Locations as projection on db.Location;
-    entity Crew as projection on db.Crew;
+    // entity Crew as projection on db.;
     // entity Casting as projection on db.Casting;
 }

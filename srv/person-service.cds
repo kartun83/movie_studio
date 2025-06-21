@@ -6,7 +6,7 @@ service PersonService {
   @odata.draft.enabled: true
   entity Persons as projection on M.Person {
     ID,
-    name,
+    name @assert.notNull,
     role,
     birthDate,
     agency,

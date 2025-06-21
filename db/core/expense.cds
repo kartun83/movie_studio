@@ -8,7 +8,7 @@ entity Expense : cuid, managed {
   movie       : Association to MovieProject;
   category    : Association to ExpenseCategory;
   amount      : Decimal(15,2);
-  currency    : Currency;
-  date        : Date;
+  currency    : Currency @assert.notNull;
+  date        : Date @assert.notNull;
   description : String(255);
 }
