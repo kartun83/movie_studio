@@ -6,12 +6,12 @@ using { com.kartun.movie_studio.PersonRole } from '../codelists';
 entity Person : cuid, managed {
   name        : String(100);
   role        : Association to PersonRole;
-  birthDate   : Date;
-  agency      : String(100);
+  birthDate   : Date; 
+  agency      : String(100); @nullable
   contactInfo : many ContactInfo;
 //   contactInfo : array of  ContactInfo;
   country     : Country;
-  language    : Language;
+  language    : many Language;
 }
 
 type ContactInfo : {

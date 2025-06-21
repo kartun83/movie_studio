@@ -19,7 +19,7 @@ entity MovieProject : cuid, managed {
   budget             : Decimal(15,2);
   currency           : Currency;
   genre_primary      : Association to GenreType;
-  genre_secondary    : Association to many GenreType;
+  genre_secondary    : Association to many MovieGenreSecondary on genre_secondary.movie = $self;
   director           : Association to Person;
   expenses           : Association to many Expense on expenses.movie = $self;
   castings           : Association to many Casting on castings.movie = $self;
@@ -28,4 +28,9 @@ entity MovieProject : cuid, managed {
   assets             : Association to many Asset on assets.movie = $self;
   contracts          : Association to many Contract on contracts.movie = $self;
   productionStatusLogs : Association to many ProductionStatusLog on productionStatusLogs.movie = $self;
+}
+
+entity MovieGenreSecondary {
+  movie : Association to MovieProject;
+  genre : Association to GenreType;
 }
