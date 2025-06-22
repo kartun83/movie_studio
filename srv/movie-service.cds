@@ -5,7 +5,7 @@ service MovieService {
 
   @odata.draft.enabled: true
   @cds.redirection.target: true
-  @assert.range: [budget, 0, 1e10]   // budget >= 0
+  // @assert.range: [budget, 0, 1e10]   // budget >= 0
   entity Movies as projection on M.MovieProject {
     ID,
     title,

@@ -1,4 +1,4 @@
-using com.kartun.movie_studio as db from '../../db/schema';
+using com.kartun.movie_studio as db from '../db/schema';
 
 
 /**
