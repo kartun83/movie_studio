@@ -1,25 +1,21 @@
-const cdsLib = require('@sap/cds');
-const { SELECT: SELECT_QUERY } = cdsLib;
+import cds from '@sap/cds';
+type Location = { ID: string; isTechnical: boolean }; // Define or import generated types
 
-module.exports = async function(srv) {
-  const { Assets } = srv.entities;
+export default class AssetsService extends cds.ApplicationService {
+  async init() {
+    await super.init();
 
-  // Get available assets by type
-  srv.on('getAvailableAssets', async (req) => {
-    const type = req.params[0];
-    const tx = cdsLib.transaction(req);
+    this.before('CREATE', 'Assets', async (req) => {
+      const [location] = await cds.read('movie_studio.Location')
+        .where({ ID: req.data.location_ID })
+        .limit(1);
+      if (!location?.isTechnical) {
+        req.error(400, "Assets require technical locations");
+      }
+    });
 
-    const assets = await tx.run(
-      SELECT_QUERY.from(Assets)
-        .where({ 
-          'type.code': type,
-          'status.code': 'AVAILABLE'
-        })
-    );
-
-    return assets;
-  });
-
-  // Log registered handlers for debugging
-  console.log('AssetsService registered');
-}; 
+    this.on('getAvailableAssets', async (req) => {
+      return cds.read('Assets').where({ type: req.params[0] });
+    });
+  }
+}

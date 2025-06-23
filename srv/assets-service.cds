@@ -21,4 +21,6 @@ service AssetsService {
   @readonly entity AssetStatus as projection on M.AssetStatus;
   @readonly entity AssetType as projection on M.AssetType;
   @readonly entity Location as projection on M.Location;
+
+  
 }

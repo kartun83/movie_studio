@@ -21,8 +21,7 @@ service MovieService {
   entity Expenses as projection on M.Expense;
   entity Assets as projection on M.Asset;
 
-  function getTotalBudget(
-    genre : String
+  function getTotalBudget(    
   ) returns Decimal(15,2);
 
   action closeProject(

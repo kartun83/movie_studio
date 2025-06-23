@@ -23,12 +23,12 @@ export default class BudgetService extends cds.ApplicationService {
 
     private async getTotalBudget(req: cds.Request) {
         const genre = req.params[0] as string;
-        const tx = getTransaction(req);
+        const tx = cds.transaction(req);
 
-        const result = await tx.run<{ total: number }>(
-            SELECT.from<MovieProject>('MovieProject')
+        const result = await tx.run(
+            SELECT.from('MovieProject')
                 .where({ 'genre_primary.code': genre })
-                .columns([{ func: 'sum', args: ['budget'], as: 'total' }])
+                .columns('sum(budget) as total')
         );
 
         return result[0]?.total || 0;
@@ -38,17 +38,17 @@ export default class BudgetService extends cds.ApplicationService {
         const { status } = req.data as { status: string };
         const tx = cds.transaction(req);
 
-        const query = SELECT.one<BudgetStats>()
+        const query = SELECT
             .columns([
                 'count(*) as count',
                 'sum(budget) as total',
                 'avg(budget) as avg'
             ])
-            .from<MovieProject>('MovieProject')
+            .from('MovieProject')
             .where({ status_code: status });
 
         const result = await tx.run(query);
-        return result || { count: 0, total: 0, avg: 0 };
+        return result[0] || { count: 0, total: 0, avg: 0 };
     }
 }
 

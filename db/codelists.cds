@@ -33,8 +33,15 @@ entity AssetStatus : CodeList {
 }
 
 @cds.odata.valuelist
-entity AvailabilityStatus : CodeList {
+entity LocationAvailabilityStatus : CodeList {
   key code : String(30);
+      name : localized String(100);
+}
+
+@cds.odata.valuelist
+entity LocationType : CodeList {
+  key code : String(30);
+      isTechnical : Boolean default false; // ← Flag for internal/technical locations
       name : localized String(100);
 }
 

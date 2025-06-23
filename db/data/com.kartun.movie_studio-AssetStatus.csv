@@ -1,5 +1,6 @@
 code,name,descr
 AVAILABLE,Available,
+RESERVED,Reserved,
 IN_USE,In Use,
 MAINTENANCE,Under Maintenance,
 RETIRED,Retired,

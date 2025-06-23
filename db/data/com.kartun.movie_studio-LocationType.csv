@@ -1,0 +1,12 @@
+code,isTechnical,name,descr
+STUD,Studio,false,
+WARE,Warehouse,true,
+WRDB,Wardrobe,true,
+REPL,Repair Lab,true,
+STOR,Storage Unit,true,
+STGE,Soundstage,false,
+BACK,Backlot,false,
+VEHD,Vehicle Depot,true,
+DRRM,Dressing Room,true,
+ONLC,On Location,false,
+CTRL,Control Room,true,
