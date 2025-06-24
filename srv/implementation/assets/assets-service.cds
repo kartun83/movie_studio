@@ -1,5 +1,6 @@
-using com.kartun.movie_studio as M from '../db/schema';
+using com.kartun.movie_studio as M from '../../../db/schema';
 using { Currency, cuid } from '@sap/cds/common';
+// using from './assets-service';
 
 service AssetsService {
 

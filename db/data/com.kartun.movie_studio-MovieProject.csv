@@ -1,1 +1,2 @@
 ID,title,status_code,releaseDate,budget,currency_code,genre_primary_code,director_ID,createdAt,createdBy,modifiedAt,modifiedBy
+MOV100,Test Movie,PRODUCTION,2024-07-01,1000000,USD,DRAMA,7F73EBDA-189A-C112-4309-F2B25067FE38,2024-06-01T10:00:00Z,admin,2024-06-01T10:00:00Z,admin

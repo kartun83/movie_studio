@@ -1,1 +1,2 @@
 ID,movie_ID,person_ID,characterName,isLeadRole,createdAt,createdBy,modifiedAt,modifiedBy
+CAST100,MOV100,C0FCEA30-11B0-D720-47B6-EBA426D2EAC8,Hero,true,2024-06-01T10:05:00Z,admin,2024-06-01T10:05:00Z,admin
