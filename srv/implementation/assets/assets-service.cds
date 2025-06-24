@@ -4,7 +4,6 @@ using { Currency, cuid } from '@sap/cds/common';
 
 service AssetsService {
 
-  @odata.draft.enabled: true
   entity Assets as projection on M.Asset {
     ID,
     name,
@@ -25,3 +24,6 @@ service AssetsService {
 
   
 }
+
+annotate AssetsService.Assets with @odata.draft.enabled;
+annotate AssetsService.Assets with @fiori.draft.enabled;

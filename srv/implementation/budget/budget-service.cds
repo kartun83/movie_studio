@@ -26,3 +26,6 @@ service BudgetService {
     movie : M.MovieProject:ID
   ) returns Decimal(15,2);
 }
+
+annotate BudgetService.Expenses with @odata.draft.enabled;
+annotate BudgetService.Expenses with @fiori.draft.enabled;

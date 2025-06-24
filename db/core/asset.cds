@@ -7,8 +7,8 @@ using { com.kartun.movie_studio.Location } from './location';
 
 entity Asset : cuid, managed {
   movie    : Association to one MovieProject @nullable; // 0..1 cardinality
-  type     : Association to AssetType @assert.notNull;
+  type     : Association to AssetType @assert.notNull @assert.integrity;  
   name     : String(100) @assert.notNull;
-  status   : Association to AssetStatus @assert.notNull;
-  location : Association to Location @assert.notNull;
+  status   : Association to AssetStatus @assert.notNull @assert.integrity;
+  location : Association to Location @assert.notNull @assert.integrity;
 }

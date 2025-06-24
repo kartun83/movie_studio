@@ -37,3 +37,6 @@ service MovieService {
     status.code as status
   };
 }
+
+annotate MovieService.Movies with @odata.draft.enabled;
+annotate MovieService.Movies with @fiori.draft.enabled;

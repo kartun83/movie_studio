@@ -1,14 +1,12 @@
 # MovieService HTTP Tests
 @baseUrl = http://localhost:4004/odata/v4
 
-### ------------------------------------------------------------------------
-# Get Service Metadata Document
+### Get Service Metadata Document
 GET {{baseUrl}}/movie/$metadata
 
 > {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
 
-### ------------------------------------------------------------------------
-# Get all movies
+### Get all movies
 GET {{baseUrl}}/movie/Movies
 
 > {% client.test('status 200', () => {
@@ -18,8 +16,7 @@ GET {{baseUrl}}/movie/Movies
     client.assert(response.body.value.some(m => m.title === 'Test Movie'), 'Should contain Test Movie');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get movie by ID
+### Get movie by ID
 GET {{baseUrl}}/movie/Movies('MOV100')
 
 > {% client.test('status 200', () => {
@@ -29,8 +26,7 @@ GET {{baseUrl}}/movie/Movies('MOV100')
     client.assert(response.body.budget === 1000000, 'Budget should be 1000000');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get all persons
+### Get all persons
 GET {{baseUrl}}/movie/Persons
 
 > {% client.test('status 200', () => {
@@ -39,8 +35,7 @@ GET {{baseUrl}}/movie/Persons
     client.assert(response.body.value.some(p => p.ID === 'C0FCEA30-11B0-D720-47B6-EBA426D2EAC8'), 'Should contain James Rodriguez');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get all castings
+### Get all castings
 GET {{baseUrl}}/movie/Castings
 
 > {% client.test('status 200', () => {
@@ -49,8 +44,7 @@ GET {{baseUrl}}/movie/Castings
     client.assert(response.body.value.some(c => c.ID === 'CAST100'), 'Should contain CAST100');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get all expenses
+### Get all expenses
 GET {{baseUrl}}/movie/Expenses
 
 > {% client.test('status 200', () => {
@@ -59,8 +53,7 @@ GET {{baseUrl}}/movie/Expenses
     client.assert(response.body.value.some(e => e.ID === 'EXP100'), 'Should contain EXP100');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get all assets
+### Get all assets
 GET {{baseUrl}}/movie/Assets
 
 > {% client.test('status 200', () => {
@@ -69,8 +62,7 @@ GET {{baseUrl}}/movie/Assets
     client.assert(response.body.value.length > 0, 'Should have at least one asset');
 }); %}
 
-### ------------------------------------------------------------------------
-# Test getTotalBudget function
+### Test getTotalBudget function
 POST {{baseUrl}}/movie/getTotalBudget
 Content-Type: application/json
 
@@ -81,8 +73,7 @@ Content-Type: application/json
     client.assert(typeof response.body === 'number' || typeof response.body === 'object', 'Should return a number or object');
 }); %}
 
-### ------------------------------------------------------------------------
-# Test closeProject action
+### Test closeProject action
 POST {{baseUrl}}/movie/closeProject
 Content-Type: application/json
 
@@ -95,8 +86,7 @@ Content-Type: application/json
     client.assert(response.body.ID === 'MOV100', 'ID should be MOV100');
 }); %}
 
-### ------------------------------------------------------------------------
-# Get upcoming releases
+### Get upcoming releases
 GET {{baseUrl}}/movie/UpcomingReleases
 
 > {% client.test('status 200', () => {
