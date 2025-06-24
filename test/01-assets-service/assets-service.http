@@ -1,0 +1,333 @@
+# AssetsService HTTP Tests
+# In the following requests the variable baseUrl is used.
+# Its value is set here.
+@baseUrl = http://localhost:4004/odata/v4
+
+### ------------------------------------------------------------------------
+# Get Service Metadata Document
+GET {{baseUrl}}/assets/$metadata
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Get all assets
+GET {{baseUrl}}/assets/Assets
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get all asset statuses (readonly)
+GET {{baseUrl}}/assets/AssetStatus
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Get all asset types (readonly)
+GET {{baseUrl}}/assets/AssetType
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Get all locations (readonly)
+GET {{baseUrl}}/assets/Location
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Create a new asset with AVAILABLE status (should succeed)
+# @name createAvailableAsset
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Test Camera 1",
+  "type_code": "CAMERA",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 201', () => { client.assert(response.status === 201, 'Expected 201'); client.assert(response.body.ID, 'Response should have ID'); }); %}
+
+###
+
+@assetID = {{createAvailableAsset.response.body.ID}}
+
+### ------------------------------------------------------------------------
+# Create another asset with RESERVED status and movie (should succeed)
+# @name createReservedAsset
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Test Light 1",
+  "type_code": "LIGHT",
+  "status_code": "RESERVED",
+  "location_ID": "B2C3D4E5-2345-6789-1011-121314151617",
+  "movie_ID": "test-movie-1"
+}
+> {% client.test('status 201', () => { client.assert(response.status === 201, 'Expected 201'); client.assert(response.body.ID, 'Response should have ID'); }); %}
+
+###
+
+@reservedAssetID = {{createReservedAsset.response.body.ID}}
+
+### ------------------------------------------------------------------------
+# Create asset with AVAILABLE status but with movie_ID (should fail)
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Test Camera 2",
+  "type_code": "CAMERA",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161",
+  "movie_ID": "test-movie-1"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# Create asset with RESERVED status but without movie_ID (should fail)
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Test Light 2",
+  "type_code": "LIGHT",
+  "status_code": "RESERVED",
+  "location_ID": "B2C3D4E5-2345-6789-1011-121314151617"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# Get the created asset by ID
+GET {{baseUrl}}/assets/Assets({{assetID}})
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(response.body.ID === variables.assetID, 'ID should match'); }); %}
+
+### ------------------------------------------------------------------------
+# Update asset status from AVAILABLE to RESERVED (should succeed)
+PATCH {{baseUrl}}/assets/Assets({{assetID}})
+Content-Type: application/json
+
+{
+  "status_code": "RESERVED",
+  "movie_ID": "test-movie-2"
+}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(response.body.status_code === 'RESERVED', 'Status should be RESERVED'); client.assert(response.body.movie_ID === 'test-movie-2', 'movie_ID should be set'); }); %}
+
+### ------------------------------------------------------------------------
+# Update asset status from RESERVED to AVAILABLE (should clear movie_ID)
+PATCH {{baseUrl}}/assets/Assets({{assetID}})
+Content-Type: application/json
+
+{
+  "status_code": "AVAILABLE"
+}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(response.body.status_code === 'AVAILABLE', 'Status should be AVAILABLE'); client.assert(!response.body.movie_ID, 'movie_ID should be cleared'); }); %}
+
+### ------------------------------------------------------------------------
+# Update asset status to RETIRED
+PATCH {{baseUrl}}/assets/Assets({{assetID}})
+Content-Type: application/json
+
+{
+  "status_code": "RETIRED"
+}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(response.body.status_code === 'RETIRED', 'Status should be RETIRED'); }); %}
+
+### ------------------------------------------------------------------------
+# Try to update RETIRED asset (should fail with 403)
+PATCH {{baseUrl}}/assets/Assets({{assetID}})
+Content-Type: application/json
+
+{
+  "name": "Updated Camera Name"
+}
+> {% client.test('status 403', () => { client.assert(response.status === 403, 'Expected 403'); }); %}
+
+### ------------------------------------------------------------------------
+# Try to delete RETIRED asset (should fail with 403)
+DELETE {{baseUrl}}/assets/Assets({{assetID}})
+> {% client.test('status 403', () => { client.assert(response.status === 403, 'Expected 403'); }); %}
+
+### ------------------------------------------------------------------------
+# Create a new asset for deletion testing
+# @name createAssetForDelete
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Test Microphone 1",
+  "type_code": "MIC",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 201', () => { client.assert(response.status === 201, 'Expected 201'); client.assert(response.body.ID, 'Response should have ID'); }); %}
+
+###
+
+@deleteAssetID = {{createAssetForDelete.response.body.ID}}
+
+### ------------------------------------------------------------------------
+# Delete non-RETIRED asset (should succeed)
+DELETE {{baseUrl}}/assets/Assets({{deleteAssetID}})
+> {% client.test('status 204', () => { client.assert(response.status === 204, 'Expected 204'); }); %}
+
+### ------------------------------------------------------------------------
+# Try to get deleted asset (should return 404)
+GET {{baseUrl}}/assets/Assets({{deleteAssetID}})
+> {% client.test('status 404', () => { client.assert(response.status === 404, 'Expected 404'); }); %}
+
+### ------------------------------------------------------------------------
+# Test getAvailableAssets function with CAMERA type
+POST {{baseUrl}}/assets/getAvailableAssets(type='CAMERA')
+Content-Type: application/json
+
+{}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Test getAvailableAssets function with LIGHT type
+POST {{baseUrl}}/assets/getAvailableAssets(type='LIGHT')
+Content-Type: application/json
+
+{}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Test getAvailableAssets function with non-existent type
+POST {{baseUrl}}/assets/getAvailableAssets(type='NONEXISTENT')
+Content-Type: application/json
+
+{}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets filtered by status
+GET {{baseUrl}}/assets/Assets?$filter=status_code eq 'AVAILABLE'
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets filtered by type
+GET {{baseUrl}}/assets/Assets?$filter=type_code eq 'CAMERA'
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets filtered by location
+GET {{baseUrl}}/assets/Assets?$filter=location_ID eq 'A1B2C3D4-1234-5678-9101-112131415161'
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets with expand to see related entities
+GET {{baseUrl}}/assets/Assets?$expand=type,status,location
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets with select to get only specific fields
+GET {{baseUrl}}/assets/Assets?$select=ID,name,type_code,status_code
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets with orderby
+GET {{baseUrl}}/assets/Assets?$orderby=name asc
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Get assets with top and skip for pagination
+GET {{baseUrl}}/assets/Assets?$top=5&$skip=0
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); client.assert(Array.isArray(response.body.value), 'Response should be array'); }); %}
+
+### ------------------------------------------------------------------------
+# Test draft functionality - create draft
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Draft Camera",
+  "type_code": "CAMERA",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 201', () => { client.assert(response.status === 201, 'Expected 201'); client.assert(response.body.ID, 'Response should have ID'); }); %}
+
+###
+
+@draftID = {{createDraftAsset.response.body.ID}}
+
+### ------------------------------------------------------------------------
+# Test draft functionality - activate draft
+POST {{baseUrl}}/assets/Assets(ID='{{draftID}}',IsActiveEntity=false)/com.kartun.movie_studio.draftActivate
+Content-Type: application/json
+
+{}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Test draft functionality - edit draft
+PATCH {{baseUrl}}/assets/Assets(ID='{{draftID}}',IsActiveEntity=false)
+Content-Type: application/json
+
+{
+  "name": "Updated Draft Camera"
+}
+> {% client.test('status 200', () => { client.assert(response.status === 200, 'Expected 200'); }); %}
+
+### ------------------------------------------------------------------------
+# Test draft functionality - discard draft
+DELETE {{baseUrl}}/assets/Assets(ID='{{draftID}}',IsActiveEntity=false)
+> {% client.test('status 204', () => { client.assert(response.status === 204, 'Expected 204'); }); %}
+
+### ------------------------------------------------------------------------
+# Test error handling - create asset with invalid type
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Invalid Asset",
+  "type_code": "INVALID_TYPE",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# Test error handling - create asset with invalid status
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Invalid Status Asset",
+  "type_code": "CAMERA",
+  "status_code": "INVALID_STATUS",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# Test error handling - create asset with invalid location
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Invalid Location Asset",
+  "type_code": "CAMERA",
+  "status_code": "AVAILABLE",
+  "location_ID": "INVALID_LOCATION_ID"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# Test error handling - create asset with missing required fields
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": "Incomplete Asset"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}
+
+### ------------------------------------------------------------------------
+# @title Test error handling - create asset with null name
+POST {{baseUrl}}/assets/Assets
+Content-Type: application/json
+
+{
+  "name": null,
+  "type_code": "CAMERA",
+  "status_code": "AVAILABLE",
+  "location_ID": "A1B2C3D4-1234-5678-9101-112131415161"
+}
+> {% client.test('status 400', () => { client.assert(response.status === 400, 'Expected 400'); }); %}

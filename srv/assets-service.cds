@@ -10,7 +10,7 @@ service AssetsService {
     type,
     status,
     location,
-    movie
+    movie,
   }
 
   function getAvailableAssets(
