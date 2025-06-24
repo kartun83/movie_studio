@@ -7,16 +7,15 @@ service AssetsService {
   entity Assets as projection on M.Asset {
     ID,
     name,
-    type,
-    status,
-    location,
+    type @assert.integrity,
+    status @assert.integrity,
+    location @assert.integrity,
     movie,
   }
 
   function getAvailableAssets(
     type : String
-  ) returns many Assets
-    @odata.contained: false;
+  ) returns many Assets;
 
   @readonly entity AssetStatus as projection on M.AssetStatus;
   @readonly entity AssetType as projection on M.AssetType;
