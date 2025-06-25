@@ -14,6 +14,30 @@
     }
   ],
   "attributes": [],
-  "role-templates": [],
-  "authorities-inheritance": false
+  "role-templates": [
+    {
+      "name": "AssetManager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.AssetManager"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "Admin",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Admin"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "StudioDirector",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.StudioDirector"
+      ],
+      "attribute-references": []
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 using com.kartun.movie_studio as M from '../../../db/schema';
 using { Currency, cuid } from '@sap/cds/common';
 
-service BudgetService {
+service BudgetService @(requires: 'authenticated-user'){
 
 //   entity Movies as projection on M.MovieProject;
   entity Assets as projection on M.Asset;
@@ -10,7 +10,7 @@ service BudgetService {
   entity Distributions as projection on M.DistributionRight;
   entity Locations as projection on M.Location;
 
-  function getTotalBudgetForGenre(
+  function getTotalBudgetForGenre@(requires: 'FinancialAnalyst')(
     genre : M.GenreType:code
   ) returns {
     count : Integer;
@@ -18,11 +18,11 @@ service BudgetService {
     avg : Decimal(15,2);
   }
 
-  function getTotalBudgetForStatus(
+  function getTotalBudgetForStatus @(requires: 'FinancialAnalyst')(
     status : M.ProjectStatus:code
   ) returns Decimal(15,2);
 
-  function getTotalBudgetForMovie(
+  function getTotalBudgetForMovie @(requires: 'FinancialAnalyst')(
     movie : M.MovieProject:ID
   ) returns Decimal(15,2);
 }

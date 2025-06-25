@@ -6,7 +6,7 @@ using { Country, Language } from '@sap/cds/common';
 /**
  * Serves administrators managing everything
  */
-service ConfigService @(path: '/config') {
+service ConfigService @(path: '/config') @(requires: ['Consultant','authenticated-user']) {
 
     // entity Countries as projection on M.Countries;
     // entity Languages as projection on M.Languages;
