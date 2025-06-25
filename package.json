@@ -38,7 +38,12 @@
         "[production]": "xsuaa",
         "[development]": "mock"
       },
-      "connectivity": true
+      "connectivity": true,
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      }
     },
     "sql": {
       "native_hana_associations": false

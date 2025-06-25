@@ -1,5 +1,18 @@
 {
-  "scopes": [],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.AssetManager",
+      "description": "AssetManager"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin"
+    },
+    {
+      "name": "$XSAPPNAME.StudioDirector",
+      "description": "StudioDirector"
+    }
+  ],
   "attributes": [],
   "role-templates": [],
   "authorities-inheritance": false
