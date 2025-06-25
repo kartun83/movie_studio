@@ -19,7 +19,7 @@ service AssetsService {
     movie,
   }
 
-  function @(requires: 'authenticated-user') getAvailableAssets(
+  function getAvailableAssets @(requires: 'authenticated-user')(
     type : String
   ) returns many Assets;
 
@@ -30,7 +30,7 @@ service AssetsService {
   
 }
 
-annotate AssetsService.Assets with @(odata.draft.enabled, 
+annotate AssetsService.Assets with @(//odata.draft.enabled, 
       fiori.draft.enabled,
       requires: ['AssetManager']);
 //annotate AssetsService.Assets with @fiori.draft.enabled;
