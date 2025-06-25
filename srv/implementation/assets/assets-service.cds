@@ -4,7 +4,13 @@ using { Currency, cuid } from '@sap/cds/common';
 
 service AssetsService {
 
-  entity Assets as projection on M.Asset {
+  entity Assets @(restrict: [
+    { grant: ['WRITE'], to: ['Admin', 'AssetManager', 'StudioDirector'] },
+    { grant: '*', where: 'created_by = $user' },
+    { grant: 'READ', to: 'authenticated-user' } 
+//    { grant: 'READ', where: 'created_by = $user' }
+  ])
+    as projection on M.Asset {
     ID,
     name,
     type @assert.integrity,
@@ -13,7 +19,7 @@ service AssetsService {
     movie,
   }
 
-  function getAvailableAssets(
+  function @(requires: 'authenticated-user') getAvailableAssets(
     type : String
   ) returns many Assets;
 
@@ -24,5 +30,7 @@ service AssetsService {
   
 }
 
-annotate AssetsService.Assets with @odata.draft.enabled;
-annotate AssetsService.Assets with @fiori.draft.enabled;
+annotate AssetsService.Assets with @(odata.draft.enabled, 
+      fiori.draft.enabled,
+      requires: ['AssetManager']);
+//annotate AssetsService.Assets with @fiori.draft.enabled;

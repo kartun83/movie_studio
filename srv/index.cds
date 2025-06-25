@@ -6,3 +6,6 @@ using from './implementation/admin/admin-service';
 using from './implementation/assets/assets-service';
 using from './implementation/hr/hr-service';
 using from './implementation/movie/movie-service';
+
+annotate MovieService with @(requires: 'authenticated-user');
+ 

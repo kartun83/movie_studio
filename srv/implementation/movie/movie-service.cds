@@ -38,5 +38,5 @@ service MovieService {
   };
 }
 
-annotate MovieService.Movies with @odata.draft.enabled;
-annotate MovieService.Movies with @fiori.draft.enabled;
+annotate MovieService.Movies with @(odata.draft.enabled, fiori.draft.enabled );
+//annotate MovieService.Movies with @fiori.draft.enabled;
