@@ -10,7 +10,7 @@ service BudgetService @(requires: 'authenticated-user'){
   entity Distributions as projection on M.DistributionRight;
   entity Locations as projection on M.Location;
 
-  function getTotalBudgetForGenre@(requires: 'FinancialAnalyst')(
+  function getTotalBudgetForGenre @(requires: 'FinancialAnalyst')(
     genre : M.GenreType:code
   ) returns {
     count : Integer;

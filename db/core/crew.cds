@@ -10,5 +10,5 @@ entity CrewAssignment : cuid, managed {
   movie           : Association to MovieProject;
   person          : Association to Person;
   department      : Association to Department;
-  roleDescription : Association to PersonRole;
+  role            : Association to PersonRole;
 }

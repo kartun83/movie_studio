@@ -11,6 +11,21 @@
     {
       "name": "$XSAPPNAME.StudioDirector",
       "description": "StudioDirector"
+    },
+    {
+      "name": "$XSAPPNAME.FinancialAnalyst",
+      "description": "FinancialAnalyst"
+    },
+    {
+      "name": "$XSAPPNAME.Consultant",
+      "description": "Consultant"
+    },
+    {
+      "name": "$XSAPPNAME.mtcallback",
+      "description": "Subscription via SaaS Registry",
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      ]
     }
   ],
   "attributes": [],

@@ -1,6 +1,6 @@
 namespace com.kartun.movie_studio;
 
-using { cuid, managed, Country, Language } from '@sap/cds/common';
+using { cuid, managed, Country } from '@sap/cds/common';
 using { com.kartun.movie_studio.PersonRole } from '../codelists';
 
 entity Person : cuid, managed {
@@ -11,7 +11,13 @@ entity Person : cuid, managed {
   contactInfo : many ContactInfo;
 //   contactInfo : array of  ContactInfo;
   country     : Country;
-  language    : many Language;
+  languages   : Composition of many Language on languages.person = $self;
+}
+
+entity Language : cuid, managed {
+  code    : String(10);
+  name    : String(100);
+  person  : Association to Person;
 }
 
 type ContactInfo : {

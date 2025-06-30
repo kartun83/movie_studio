@@ -8,6 +8,7 @@
   "dependencies": {
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
+    "@sap/cds-mtxs": "^3",
     "@sap/xssec": "^4",
     "express": "^4"
   },
@@ -30,7 +31,16 @@
   "scripts": {
     "start": "cds-serve",
     "test": "jest --detectOpenHandles --forceExit",
-    "start_ts": "cds watch --profile ts"
+    "start_ts": "cds watch --profile ts",
+    "start_hybrid": "cds watch --profile hybrid --profile ts",
+    "mta_build": "mbt build",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:win": "powershell -ExecutionPolicy Bypass -File .\\scripts\\deploy.ps1",
+    "build:deploy": "npm run mta_build && npm run deploy",
+    "build:deploy:win": "npm run mta_build && npm run deploy:win",
+    "deploy_hana": "cds deploy --to hana",
+    "deploy_hana_hybrid": "cds deploy --to hana --profile hybrid",
+    "cds_compile_xsua": "cds compile --to xsuaa"
   },
   "cds": {
     "requires": {
@@ -42,12 +52,20 @@
       "[production]": {
         "auth": {
           "kind": "xsuaa"
-        }
-      }
+        },
+        "multitenancy": true
+      },
+      "[hybrid]": {
+        "db": "hana"
+      },
+      "destinations": true,
+      "html5-runtime": true,
+      "workzone": true
     },
     "sql": {
       "native_hana_associations": false
     },
-    "language": "ts"
+    "language": "ts",
+    "profile": "with-mtx-sidecar"
   }
 }
