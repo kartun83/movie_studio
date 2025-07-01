@@ -27,7 +27,7 @@ service AssetsService {
   @readonly entity AssetType as projection on M.AssetType;
   @readonly entity Location as projection on M.Location;
 
-  
+  function sleep() returns Boolean;
 }
 
 annotate AssetsService.Assets with @(//odata.draft.enabled, 

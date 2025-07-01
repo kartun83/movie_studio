@@ -12,6 +12,7 @@ class AssetsService extends cds.ApplicationService {
 
     // Custom functions
     this.on('getAvailableAssets', this.getAvailableAssets);
+    this.on('sleep', this.sleep);
     return await super.init();
   }
 
@@ -60,6 +61,18 @@ class AssetsService extends cds.ApplicationService {
       return;
     }
     return cds.read('Assets').where({ type_code: type, status_code: 'AVAILABLE' });
+  }
+
+  private async sleep(req: cds.Request) {
+    try {
+        let dbQuery = ' Call "sleep"( )'
+        let result = await cds.run(dbQuery, { })
+        console.info(result)
+        return true
+    } catch (error: unknown) {
+        console.error(error)
+        return false
+    }
   }
 }
 
