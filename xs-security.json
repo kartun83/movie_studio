@@ -2,14 +2,15 @@
   "xsappname": "movie_studio",
   "tenant-mode": "dedicated",
   "oauth2-configuration": {
+    "token-validity": 1800, 
+    "refresh-token-validity": 43200,
     "credential-types": [
         "binding-secret",
         "x509"
     ],
     "redirect-uris": [
         "https://*.applicationstudio.cloud.sap/**",
-        "https://*localhost:*/**",
-        "http://*localhost:4004/**"
+        "http://localhost:5000/**"
     ]
   },
   "scopes": [

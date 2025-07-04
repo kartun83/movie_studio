@@ -9,8 +9,10 @@
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
     "@sap/cds-mtxs": "^3",
+    "@sap/xsenv": "^5.6.1",
     "@sap/xssec": "^4",
-    "express": "^4"
+    "express": "^4",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.3.0",

@@ -1,10 +1,20 @@
 {
   "authenticationMethod": "route",
   "welcomeFile": "index.html", 
+  "pluginMetadataEndpoint": "/metadata",
   "logout": {
     "logoutEndpoint": "/app-logout",
     "logoutPage": "/"
-},
+  },
+  "responseHeaders" : [
+    {"name": "Content-Security-Policy", "value": "default-src 'self'"}
+  ],
+  "compression": { 
+     "minSize": 2048
+  },
+  "websockets": {
+    "enabled": true
+  },
   "routes": [
     {
       "source": "^/app/(.*)$",
