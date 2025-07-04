@@ -1,5 +1,26 @@
 {
+  "xsappname": "movie_studio",
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "credential-types": [
+        "binding-secret",
+        "x509"
+    ],
+    "redirect-uris": [
+        "https://*.applicationstudio.cloud.sap/**",
+        "https://*localhost:*/**",
+        "http://*localhost:4004/**"
+    ]
+  },
   "scopes": [
+    {
+      "name": "$XSAPPNAME.FinancialAnalyst",
+      "description": "FinancialAnalyst"
+    },
+    {
+      "name": "$XSAPPNAME.Consultant",
+      "description": "Consultant"
+    },
     {
       "name": "$XSAPPNAME.AssetManager",
       "description": "AssetManager"
@@ -11,25 +32,26 @@
     {
       "name": "$XSAPPNAME.StudioDirector",
       "description": "StudioDirector"
-    },
-    {
-      "name": "$XSAPPNAME.FinancialAnalyst",
-      "description": "FinancialAnalyst"
-    },
-    {
-      "name": "$XSAPPNAME.Consultant",
-      "description": "Consultant"
-    },
-    {
-      "name": "$XSAPPNAME.mtcallback",
-      "description": "Subscription via SaaS Registry",
-      "grant-as-authority-to-apps": [
-        "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
-      ]
     }
   ],
   "attributes": [],
   "role-templates": [
+    {
+      "name": "FinancialAnalyst",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.FinancialAnalyst"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "Consultant",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Consultant"
+      ],
+      "attribute-references": []
+    },
     {
       "name": "AssetManager",
       "description": "generated",

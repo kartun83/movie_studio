@@ -1,0 +1,142 @@
+{
+  "profiles": {
+    "db-hybrid-uaa-mock": {
+      "db": {
+        "kind": "hana",
+        "model": [
+          "db",
+          "srv"
+        ]
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "admin": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "ALL_ACCESS",
+              "HEALTHCHECK"
+            ]
+          },
+          "technical-user": {
+            "password": "",
+            "roles": [
+              "TECHNICAL_USER"
+            ]
+          },
+          "assetmanager": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "AssetManager"
+            ]
+          },
+          "studiodirector": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "StudioDirector"
+            ]
+          },
+          "consultant": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "Consultant"
+            ]
+          },
+          "financial": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "FinancialAnalyst"
+            ]
+          }
+        }
+      }
+    },
+    "sqlite-mock": {
+      "db": {
+        "kind": "sqlite",
+        "model": [
+          "db",
+          "srv"
+        ]
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "admin": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "Admin"
+            ]
+          },
+          "assetmanager": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "AssetManager"
+            ]
+          },
+          "studiodirector": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "StudioDirector"
+            ]
+          },
+          "consultant": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "Consultant"
+            ]
+          },
+          "financial": {
+            "password": "",
+            "roles": [
+              "authenticated-user",
+              "FinancialAnalyst"
+            ]
+          }
+        }
+      }
+    },
+    "ias": {
+      "db": {
+        "kind": "hana",
+        "model": [
+          "db",
+          "srv"
+        ]
+      },
+      "auth": {
+        "kind": "mocked"
+      }
+    },
+    "ias-real": {
+      "db": {
+        "kind": "hana",
+        "model": [
+          "db",
+          "srv"
+        ]
+      },
+      "auth": {
+        "kind": "xsuaa",
+        "identity-provider": "ias"
+      }
+    }
+  },
+  "requires": {
+    "db": {
+      "kind": "hana"
+    },
+    "auth": {
+      "kind": "mocked"
+    }
+  }
+} 

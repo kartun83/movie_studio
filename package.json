@@ -33,6 +33,11 @@
     "test": "jest --detectOpenHandles --forceExit",
     "start_ts": "cds watch --profile ts",
     "start_hybrid": "cds watch --profile hybrid --profile ts",
+    "start:sqlite-mock": "cds watch --profile sqlite-mock",
+    "start:hana-mock": "cds watch --profile db-hybrid-uaa-mock",
+    "start:ias": "cds watch --profile ias",
+    "start:ias-real": "cds watch --profile ias-real",
+    "start:approuter": "cds bind --exec -- npm start --prefix app/router",
     "mta_build": "mbt build",
     "deploy": "./scripts/deploy.sh",
     "deploy:win": "powershell -ExecutionPolicy Bypass -File .\\scripts\\deploy.ps1",
@@ -40,18 +45,19 @@
     "build:deploy:win": "npm run mta_build && npm run deploy:win",
     "deploy_hana": "cds deploy --to hana",
     "deploy_hana_hybrid": "cds deploy --to hana --profile hybrid",
-    "cds_compile_xsua": "cds compile --to xsuaa"
+    "cds_compile_xsua": "cds compile srv/ --to xsuaa > xs-security.json"
   },
   "cds": {
     "requires": {
       "auth": {
         "[production]": "xsuaa",
-        "[development]": "mock"
+        "[development]": "mocked"
       },
       "connectivity": true,
       "[production]": {
         "auth": {
-          "kind": "xsuaa"
+          "kind": "xsuaa",
+          "identity-provider": "ias"
         },
         "multitenancy": true
       },

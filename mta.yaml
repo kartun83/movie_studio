@@ -62,7 +62,7 @@ modules:
 
   - name: movie_studio-app-deployer
     type: com.sap.application.content
-    path: gen
+    path: app/router
     requires:
       - name: movie_studio-html5-repo-host
         parameters:
@@ -70,6 +70,7 @@ modules:
     build-parameters:
       build-result: app/
       requires:
+      - name: movie_studio
 
 
   - name: movie_studio-destinations
@@ -140,8 +141,28 @@ resources:
         oauth2-configuration:
           redirect-uris:
             - https://~{app-api/app-uri}/**
+        identity-provider:
+          name: ias
+          origin-key: ias
     requires:
       - name: app-api
+  - name: movie_studio-ias
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: identity
+      service-plan: application
+      config:
+        xsappname: movie_studio-${org}-${space}
+        oauth2-configuration:
+          redirect-uris:
+            - https://~{app-api/app-uri}/**
+        grant-types:
+          - authorization_code
+          - refresh_token
+        response-types:
+          - code
+        token-validity: 43200
+        refresh-token-validity: 2592000
   - name: movie_studio-connectivity
     type: org.cloudfoundry.managed-service
     parameters:
