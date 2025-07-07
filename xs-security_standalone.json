@@ -1,6 +1,18 @@
 {
   "xsappname": "movie_studio",
   "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "token-validity": 1800, 
+    "refresh-token-validity": 43200,
+    "credential-types": [
+        "binding-secret",
+        "x509"
+    ],
+    "redirect-uris": [
+        "https://*.applicationstudio.cloud.sap/**",
+        "http://localhost:5000/**"
+    ]
+  },
   "scopes": [
     {
       "name": "$XSAPPNAME.FinancialAnalyst",

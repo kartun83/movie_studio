@@ -28,7 +28,8 @@
     "jest": "^30.0.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "mbt": "latest"
   },
   "scripts": {
     "start": "cds-serve",
