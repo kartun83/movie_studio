@@ -11,10 +11,17 @@
 	</script>
 </head>
 <body class="sapUiBody" id="content">
-    <h1></h1>Hello World</h1>
-    <ul>
+	<span id="greeting"></span>
+	<ul>
 		<li><a href="/user-api/currentUser">1a. Using the <b>/currentUser</b> endpoint</a></li>
 		<li><a href="/user-api/attributes">1b. Using the <b>/attributes</b> endpoint</a></li>
 	</ul>
+	<script>
+		setTimeout(() => {
+			fetch("/user-api/currentUser").then((res) => res.json()).then((user) => {
+				document.getElementById("greeting").innerText = `Hi ${user.firstname} 👋`;
+			});
+		}, 1000);
+	</script>
 </body>
 </html>    
