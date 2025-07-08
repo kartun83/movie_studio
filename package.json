@@ -12,7 +12,8 @@
     "@sap/xsenv": "^5.6.1",
     "@sap/xssec": "^4",
     "express": "^4",
-    "passport": "^0.7.0"
+    "passport": "^0.7.0",
+    "@sap/approuter": "latest"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.3.0",
@@ -40,7 +41,8 @@
     "start:hana-mock": "cds watch --profile db-hybrid-uaa-mock",
     "start:ias": "cds watch --profile ias",
     "start:ias-real": "cds watch --profile ias-real",
-    "start:approuter": "cds bind --exec -- npm start --prefix app/router",
+    "start:approuter_standalone": "cds bind --exec -- npm start --prefix app/router",
+    "start:approuter_managed": "node node_modules/@sap/approuter/approuter.js",
     "mta_build": "mbt build",
     "deploy": "./scripts/deploy.sh",
     "deploy:win": "powershell -ExecutionPolicy Bypass -File .\\scripts\\deploy.ps1",
