@@ -30,7 +30,9 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
-    "mbt": "latest"
+    "mbt": "latest",
+    "cds-plugin-ui5": "^0.9.3",
+    "rimraf": "^5.0.5"
   },
   "scripts": {
     "start": "cds-serve",
@@ -44,13 +46,16 @@
     "start:approuter_standalone": "cds bind --exec -- npm start --prefix app/router",
     "start:approuter_managed": "node node_modules/@sap/approuter/approuter.js",
     "mta_build": "mbt build",
-    "deploy": "./scripts/deploy.sh",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "deploy:win": "powershell -ExecutionPolicy Bypass -File .\\scripts\\deploy.ps1",
     "build:deploy": "npm run mta_build && npm run deploy",
     "build:deploy:win": "npm run mta_build && npm run deploy:win",
     "deploy_hana": "cds deploy --to hana",
     "deploy_hana_hybrid": "cds deploy --to hana --profile hybrid",
-    "cds_compile_xsua": "cds compile srv/ --to xsuaa > xs-security.json"
+    "cds_compile_xsua": "cds compile srv/ --to xsuaa > xs-security.json",
+    "watch-movie_stuidio_ui": "cds watch --open ns.moviestuidioui/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy movie_studio_mta --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive"
   },
   "cds": {
     "requires": {
@@ -78,5 +83,11 @@
     },
     "language": "ts",
     "profile": "with-mtx-sidecar"
-  }
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/movie_stuidio_ui"
+  ]
 }

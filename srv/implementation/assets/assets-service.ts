@@ -10,9 +10,6 @@ class AssetsService extends cds.ApplicationService {
     this.before('UPDATE', 'Assets', this.checkStatus);
     this.before('CREATE', 'Assets', this.checkBeforeCreate);
 
-    // Custom functions
-    this.on('getAvailableAssets', this.getAvailableAssets);
-    this.on('sleep', this.sleep);
     return await super.init();
   }
 

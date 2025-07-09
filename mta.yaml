@@ -1,4 +1,4 @@
-_schema-version: "3.3.0"
+_schema-version: 3.3.0
 ID: movie_studio_mta
 description: Movie studio applcation
 version: 1.0.1
@@ -33,6 +33,30 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: movie_studio_mta-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: movie_studio_mta-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - nsmoviestuidioui.zip
+      name: nsmoviestuidioui
+      target-path: resources/
+- name: nsmoviestuidioui
+  type: html5
+  path: app/movie_stuidio_ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: movie_studio_mta-destination-service
   type: org.cloudfoundry.managed-service

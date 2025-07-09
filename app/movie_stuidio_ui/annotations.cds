@@ -1,0 +1,1 @@
+using MovieService as service from '../../srv/implementation/movie/movie-service';

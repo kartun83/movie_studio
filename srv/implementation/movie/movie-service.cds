@@ -3,8 +3,8 @@ using com.kartun.movie_studio as M from '../../../db/schema';
 
 service MovieService {
 
-  @odata.draft.enabled: true
-  @cds.redirection.target: true
+  // @odata.draft.enabled: true
+  // @cds.redirection.target: true
   // @assert.range: [budget, 0, 1e10]   // budget >= 0
   entity Movies as projection on M.MovieProject {
     ID,
@@ -30,13 +30,15 @@ service MovieService {
   ) returns Movies
     @odata.contained: false;
 
-  entity UpcomingReleases as projection on M.MovieProject {
-    ID,
-    title,
-    releaseDate,
-    status.code as status
-  };
+  // entity UpcomingReleases as projection on M.MovieProject {
+  //   ID,
+  //   title,
+  //   releaseDate,
+  //   status.code as status
+  // };
 }
 
-annotate MovieService.Movies with @(odata.draft.enabled, fiori.draft.enabled );
+// annotate MovieService.Movies with @(odata.draft.enabled, fiori.draft.enabled );
 //annotate MovieService.Movies with @fiori.draft.enabled;
+
+//annotate MovieService.Movies with @cds.redirection.target: true;
