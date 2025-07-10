@@ -53,7 +53,7 @@
     "deploy_hana": "cds deploy --to hana",
     "deploy_hana_hybrid": "cds deploy --to hana --profile hybrid",
     "cds_compile_xsua": "cds compile srv/ --to xsuaa > xs-security.json",
-    "watch-movie_stuidio_ui": "cds watch --open ns.moviestuidioui/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-movie_stuidio_ui": "cds watch --open com.kartun.movie_studio/index.html?sap-ui-xx-viewCache=false --livereload false",
     "undeploy": "cf undeploy movie_studio_mta --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive"
   },

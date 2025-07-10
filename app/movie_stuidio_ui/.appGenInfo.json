@@ -24,6 +24,6 @@
         "value": "Movies"
       }
     ],
-    "launchText": "In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:\n\nhttp://localhost:4004/ns.moviestuidioui/index.html"
+    "launchText": "In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:\n\nhttp://localhost:4004/com.kartun.movie_studio/index.html"
   }
 }

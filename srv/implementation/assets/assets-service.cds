@@ -30,7 +30,7 @@ service AssetsService {
   function sleep() returns Boolean;
 }
 
-annotate AssetsService.Assets with @(//odata.draft.enabled, 
-      fiori.draft.enabled,
-      requires: ['AssetManager']);
+// annotate AssetsService.Assets with @(
+//       fiori.draft.enabled,
+//       requires: ['AssetManager']);
 //annotate AssetsService.Assets with @fiori.draft.enabled;

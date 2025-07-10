@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
 
     return new ListReport(
         {
-            appId: 'ns.moviestuidioui',
+            appId: 'com.kartun.movie_studio',
             componentId: 'MoviesList',
             contextPath: '/Movies'
         },

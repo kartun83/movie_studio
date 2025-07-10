@@ -71,7 +71,9 @@
             "password": "",
             "roles": [
               "authenticated-user",
-              "Admin"
+              "Admin",
+              "ALL_ACCESS",
+              "HEALTHCHECK"
             ]
           },
           "assetmanager": {

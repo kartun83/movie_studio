@@ -9,7 +9,9 @@ service MovieService {
   entity Movies as projection on M.MovieProject {
     ID,
     title,
-    budget @(assert.range: [0, 1e10])
+    budget @(assert.range: [0, 1e10]),
+    releaseDate,
+    status.code as status
   }
 
   entity Persons as projection on M.Person {

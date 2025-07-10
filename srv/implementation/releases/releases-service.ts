@@ -1,12 +1,12 @@
-// const { getDbKind, getTransaction, SELECT } = require('./base-service');
+import cds from '@sap/cds';
 
-module.exports = async function(srv) {
-  srv.on('READ', 'UpcomingReleases', async (req) => {
+module.exports = async function(srv: any) {
+  srv.on('READ', 'UpcomingReleases', async (req: any) => {
     const { earliest, latest } = req.data;
-    const dbKind = getDbKind();
-    const tx = getTransaction(req);
+    const dbKind = cds.db.kind;
+    const tx = cds.transaction(req);
 
-    let query = SELECT.from('MovieService.UpcomingReleases');
+    let query = cds.read('MovieService.UpcomingReleases');
 
     if (dbKind === 'sqlite') {
       if (earliest && latest) {
@@ -14,9 +14,9 @@ module.exports = async function(srv) {
       }
     } else {
       // HANA: use the parameterized view directly
-      query = SELECT.from('MovieService.UpcomingReleases', { earliest, latest });
+      query = cds.read('MovieService.UpcomingReleases', { earliest, latest });
     }
 
-    return tx.run(query);
+    return await query;
   });
 }; 

@@ -2,7 +2,7 @@ const cds = require("@sap/cds");
 // Relative path to root folder
 const rel_path = '/../..';
 const basePath = '/odata/v4/assets/Assets';
-const { GET, POST, PATCH, DELETE, expect } = cds.test('serve','srv/assets-service.cds').in(__dirname+rel_path)
+const { GET, POST, PATCH, DELETE, expect } = cds.test('serve','srv/implementation/assets/assets-service.cds').in(__dirname+rel_path)
 // const { GET, POST, PATCH, DELETE, expect } = cds.test('serve',
 //                                                       "AssetsService",
 //                                                       "--from",
@@ -14,7 +14,7 @@ describe('AssetsService', () => {
 
   beforeAll(async () => {
     await cds.deploy(__dirname + rel_path + '/db/schema').to('sqlite::memory:');
-    await cds.serve('AssetsService').from(__dirname + rel_path + '/srv/assets-service');
+    await cds.serve('AssetsService').from(__dirname + rel_path + '/srv/implementation/assets/assets-service');
 
     // Get service and entity references
     AssetsService = cds.services.AssetsService;

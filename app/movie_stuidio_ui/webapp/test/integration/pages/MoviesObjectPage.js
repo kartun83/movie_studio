@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'ns.moviestuidioui',
+            appId: 'com.kartun.movie_studio',
             componentId: 'MoviesObjectPage',
             contextPath: '/Movies'
         },
