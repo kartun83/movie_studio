@@ -107,7 +107,7 @@
           "target": "MoviesList"
         },
         {
-          "pattern": "Movies({key}):?query:",
+          "pattern": "Movies('{key}'):?query:",
           "name": "MoviesObjectPage",
           "target": "MoviesObjectPage"
         }

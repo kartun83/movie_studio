@@ -1,2 +1,12 @@
 ID,movie_ID,category_code,amount,currency_code,date,description,createdAt,createdBy,modifiedAt,modifiedBy
 EXP100,MOV100,TRAVEL,500,USD,2024-06-02,Travel to location,2024-06-02T09:00:00Z,admin,2024-06-02T09:00:00Z,admin
+EXP101,MOV101,CATERING,12500,USD,2024-06-03,Craft services for 3 weeks,2024-06-03T08:15:00Z,prod_mgr,2024-06-03T08:15:00Z,prod_mgr
+EXP102,MOV101,WARDROBE,8700,USD,2024-06-04,Sci-fi costumes fabrication,2024-06-04T11:30:00Z,prod_mgr,2024-06-10T09:45:00Z,accounting
+EXP103,MOV102,STUNTS,35600,USD,2024-06-08,Car chase sequence,2024-06-08T14:20:00Z,director,2024-06-08T14:20:00Z,director
+EXP104,MOV102,LOCATION,42000,USD,2024-06-09,Downtown shoot permit,2024-06-09T10:00:00Z,location_mgr,2024-06-12T16:00:00Z,accounting
+EXP105,MOV103,MUSIC,18200,USD,2024-06-11,Original score composition,2024-06-11T09:30:00Z,music_super,2024-06-11T09:30:00Z,music_super
+EXP106,MOV103,POSTPROD,57500,USD,2024-06-13,VFX sequences,2024-06-13T15:45:00Z,post_prod,2024-06-17T11:20:00Z,post_prod
+EXP107,MOV104,PROPS,23400,USD,2024-06-14,Ancient artifact replicas,2024-06-14T12:10:00Z,prop_master,2024-06-14T12:10:00Z,prop_master
+EXP108,MOV104,TRAVEL,18900,USD,2024-06-15,Iceland location scouting,2024-06-15T16:30:00Z,director,2024-06-18T14:15:00Z,accounting
+EXP109,MOV105,MAKEUP,15600,USD,2024-06-16,Special effects makeup,2024-06-16T10:45:00Z,makeup_art,2024-06-16T10:45:00Z,makeup_art
+EXP110,MOV105,INSURANCE,42300,USD,2024-06-17,Production insurance,2024-06-17T13:00:00Z,prod_mgr,2024-06-17T13:00:00Z,prod_mgr

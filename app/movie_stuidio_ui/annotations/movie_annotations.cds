@@ -93,6 +93,52 @@ annotate MovieService.Movies with @(
             budget,
             releaseDate,
             status
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Main',
+                Target: '@UI.FieldGroup#Main'
+            }
         ]
+    }
+);
+
+annotate MovieService.Movies with @(
+    UI : {
+        FieldGroup#Main: {
+        Data: [
+            {
+                $Type: 'UI.DataField',
+                Value: title,
+                Label: '{i18n>Title}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: budget,
+                Label: '{i18n>Budget}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: releaseDate,
+                Label: '{i18n>Release Date}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: status,
+                Label: '{i18n>Status}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: director.firstName,
+                Label: '{i18n>Director First Name}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: director.lastName,
+                Label: '{i18n>Director Last Name}'
+            }
+        ]
+    }
     }
 )

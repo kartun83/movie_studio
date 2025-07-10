@@ -1,1 +1,18 @@
 ID,movie_ID,status_code,timestamp,comment,createdAt,createdBy,modifiedAt,modifiedBy
+PSL101,MOV101,CONCEPT,2023-11-01T09:00:00Z,Initial concept approved by studio,2023-11-01T09:00:00Z,studio_exec,2023-11-01T09:00:00Z,studio_exec
+PSL102,MOV101,DEVELOPMENT,2024-01-15T14:30:00Z,Script first draft completed,2024-01-15T14:30:00Z,head_writer,2024-01-15T14:30:00Z,head_writer
+PSL103,MOV101,PRE_PRODUCTION,2024-03-10T11:15:00Z,"Key crew hired, locations secured",2024-03-10T11:15:00Z,line_producer,2024-03-10T11:15:00Z,line_producer
+PSL104,MOV101,PRODUCTION,2024-04-05T07:00:00Z,Principal photography began,2024-04-05T07:00:00Z,director,2024-04-05T07:00:00Z,director
+PSL105,MOV101,POST_PRODUCTION,2024-05-20T16:45:00Z,"First edit completed, VFX started",2024-05-20T16:45:00Z,editor,2024-05-20T16:45:00Z,editor
+PSL106,MOV102,CONCEPT,2023-09-10T10:00:00Z,Pitch approved with $2M budget,2023-09-10T10:00:00Z,studio_exec,2023-09-10T10:00:00Z,studio_exec
+PSL107,MOV102,DEVELOPMENT,2023-12-05T15:20:00Z,Script finalized with stunt coordinator,2023-12-05T15:20:00Z,head_writer,2023-12-05T15:20:00Z,head_writer
+PSL108,MOV102,PRODUCTION,2024-02-01T06:30:00Z,Shooting began downtown,2024-02-01T06:30:00Z,director,2024-02-01T06:30:00Z,director
+PSL109,MOV102,POST_PRODUCTION,2024-03-25T13:10:00Z,Car chase sequence in editing,2024-03-25T13:10:00Z,editor,2024-03-25T13:10:00Z,editor
+PSL110,MOV102,MARKETING,2024-05-01T09:45:00Z,Teaser trailer released,2024-05-01T09:45:00Z,marketing_mgr,2024-05-01T09:45:00Z,marketing_mgr
+PSL111,MOV103,PRODUCTION,2023-05-15T08:00:00Z,Principal photography day 1,2023-05-15T08:00:00Z,director,2023-05-15T08:00:00Z,director
+PSL112,MOV103,POST_PRODUCTION,2023-07-10T14:20:00Z,Finalizing color grading,2023-07-10T14:20:00Z,post_super,2023-07-10T14:20:00Z,post_super
+PSL113,MOV103,RELEASED,2023-06-15T00:01:00Z,Theatrical release,2023-06-15T00:01:00Z,distributor,2023-06-15T00:01:00Z,distributor
+PSL114,MOV104,DEVELOPMENT,2024-01-20T11:30:00Z,Historical consultant hired,2024-01-20T11:30:00Z,producer,2024-01-20T11:30:00Z,producer
+PSL115,MOV104,ON_HOLD,2024-03-01T16:45:00Z,Lead actor injury - 6 week delay,2024-03-01T16:45:00Z,prod_mgr,2024-03-01T16:45:00Z,prod_mgr
+PSL116,MOV105,PRE_PRODUCTION,2023-10-10T09:15:00Z,Special effects tests completed,2023-10-10T09:15:00Z,sfx_super,2023-10-10T09:15:00Z,sfx_super
+PSL117,MOV105,CANCELLED,2023-12-05T17:00:00Z,Studio pulled funding,2023-12-05T17:00:00Z,studio_exec,2023-12-05T17:00:00Z,studio_exec

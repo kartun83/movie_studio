@@ -1,1 +1,13 @@
 code,locale,name,descr
+DRAMA,es,Drama,
+DRAMA,ru,Драма,
+COMEDY,es,Comedia,
+COMEDY,ru,Комедия,
+ACTION,es,Acción,
+ACTION,ru,Боевик,
+SCIFI,es,Ciencia ficción,
+SCIFI,ru,Научная фантастика,
+THRLR,es,Suspense,
+THRLR,ru,Триллер,
+HOROR,es,Terror,
+HOROR,ru,Ужасы,
