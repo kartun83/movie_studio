@@ -6,13 +6,18 @@ service PersonService {
   @odata.draft.enabled: true
   entity Persons as projection on M.Person {
     ID,
-    name @assert.notNull,
+    lastName @assert.notNull,
+    firstName @assert.notNull,
     role,
     birthDate,
     agency,
     contactInfo,
     country,
-    language
+    languages
   }
 
+  function getFullName(
+    firstName : String,
+    lastName : String
+  ) returns String;
 } 

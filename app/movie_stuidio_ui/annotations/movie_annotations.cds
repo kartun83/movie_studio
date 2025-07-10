@@ -44,30 +44,49 @@ annotate MovieService.Movies with @(
             TypeNamePlural: 'Movies',
             Title:{
                 $Type: 'UI.DataField',
-                Value: title
+                Value: title,
+                Label: '{i18n>Movies}'
             }
         },
         LineItem: [
             {
                 $Type: 'UI.DataField',
                 Value: title,
-                Label: 'Title'
+                Label: '{i18n>Title}'
             },
             {
                 $Type: 'UI.DataField',
                 Value: budget,
-                Label: 'Budget'
+                Label: '{i18n>Budget}'
             },
             {
                 $Type: 'UI.DataField',
                 Value: releaseDate,
-                Label: 'Release Date'
+                Label: '{i18n>Release Date}'
             },
             {
                 $Type: 'UI.DataField',
                 Value: status,
-                Label: 'Status'
+                Label: '{i18n>Status}'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: director.firstName,
+                Label: '{i18n>directorFirstName}'
+            },            
+            {
+                $Type: 'UI.DataField',
+                Value: director.lastName,
+                Label: '{i18n>directorLastName}'
             }
+            // {
+            //     $Type: 'UI.DataField',
+            //     Value : {$edmJson: {
+            //         $Apply : [{$Path: 'director.lastName'} , ' ', {$Path: 'director.firstName'}],
+            //         $Function : 'odata.concat',
+            //     }},
+            //     Label: '{i18n>Director}'
+            // }
         ],
         SelectionFields: [
             title,

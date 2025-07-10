@@ -2,21 +2,23 @@ using com.kartun.movie_studio as M from '../../../db/schema';
 using { Currency, cuid } from '@sap/cds/common';
 // using from './assets-service';
 
-service AssetsService {
+service AssetsService @(path: '/asset'){
 
-  entity Assets @(restrict: [
-    { grant: ['WRITE'], to: ['Admin', 'AssetManager', 'StudioDirector'] },
-    { grant: '*', where: 'created_by = $user' },
-    { grant: 'READ', to: 'authenticated-user' } 
-//    { grant: 'READ', where: 'created_by = $user' }
-  ])
-    as projection on M.Asset {
+  entity Assets as projection on M.Asset {
+//   @(restrict: [
+//     { grant: ['WRITE'], to: ['Admin', 'AssetManager', 'StudioDirector'] },
+//     //{ grant: '*', where: 'createdBy = $user' },
+//     { grant: 'READ', to: 'authenticated-user' } 
+// //    { grant: 'READ', where: 'created_by = $user' }
+//   ])
+    // as projection on M.Asset {
     ID,
     name,
+    createdBy,
     type @assert.integrity,
     status @assert.integrity,
     location @assert.integrity,
-    movie,
+    movie
   }
 
   function getAvailableAssets @(requires: 'authenticated-user')(

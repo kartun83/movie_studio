@@ -1,7 +1,7 @@
 {
   "name": "movie_studio",
-  "version": "1.1.5",
-  "description": "Movie studio management app.",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
@@ -63,27 +63,17 @@
         "[production]": "xsuaa",
         "[development]": "mocked"
       },
-      "[development]": {
+      "connectivity": true,
+      "[production]": {
         "auth": {
-          "kind": "mocked",
-          "users": {
-            "incident.support@tester.sap.com": {
-              "password": "initial",
-              "roles": [
-                "support"
-              ]
-            },
-            "admin": {
-              "password": "",
-              "roles": [
-                "support",
-                "authenticated-user"
-              ]
-            }
-          }
-        }
+          "kind": "xsuaa",
+          "identity-provider": "ias"
+        },
+        "multitenancy": true
       },
-      "connectivity": true,      
+      "[hybrid]": {
+        "db": "hana"
+      },
       "destinations": true,
       "html5-runtime": true,
       "workzone": true
@@ -95,7 +85,7 @@
       "log": "debug"
     },
     "language": "ts",
-    "profile": "hybrid"
+    "profile": "with-mtx-sidecar"
   },
   "workspaces": [
     "app/*"

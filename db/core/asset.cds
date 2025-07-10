@@ -5,6 +5,7 @@ using { com.kartun.movie_studio.AssetType, com.kartun.movie_studio.AssetStatus }
 using { com.kartun.movie_studio.MovieProject } from './movie';
 using { com.kartun.movie_studio.Location } from './location';
 
+@cds.persistence.table
 entity Asset : cuid, managed {
   movie    : Association to one MovieProject @nullable; // 0..1 cardinality
   type     : Association to AssetType @assert.notNull @assert.integrity;  

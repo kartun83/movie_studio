@@ -4,7 +4,7 @@
     "generatorPlatform": "Visual Studio Code",
     "serviceType": "Local Cap",
     "metadataFilename": "",
-    "serviceUrl": "http://localhost:4004/odata/v4/movie/",
+    "serviceUrl": "http://localhost:4004/movie/",
     "appName": "movie_stuidio_ui",
     "appTitle": "Movie studio management",
     "appDescription": "An SAP Fiori application for movie studio management",

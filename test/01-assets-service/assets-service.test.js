@@ -1,7 +1,7 @@
 const cds = require("@sap/cds");
 // Relative path to root folder
 const rel_path = '/../..';
-const basePath = '/odata/v4/assets/Assets';
+const basePath = '/Assets';
 const { GET, POST, PATCH, DELETE, expect } = cds.test('serve','srv/implementation/assets/assets-service.cds').in(__dirname+rel_path)
 // const { GET, POST, PATCH, DELETE, expect } = cds.test('serve',
 //                                                       "AssetsService",

@@ -1,70 +1,70 @@
 namespace com.kartun.movie_studio;
 
-using { sap.common.CodeList } from '@sap/cds/common';
+using { sap.common.CodeList, managed } from '@sap/cds/common';
 
 @cds.odata.valuelist
-entity ProjectStatus : CodeList {
+entity ProjectStatus : CodeList, managed  {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity PersonRole : CodeList {
+entity PersonRole : CodeList, managed  {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity Department : CodeList {
+entity Department : CodeList, managed  {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity AssetType : CodeList {
+entity AssetType : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity AssetStatus : CodeList {
+entity AssetStatus : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity LocationAvailabilityStatus : CodeList {
+entity LocationAvailabilityStatus : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity LocationType : CodeList {
+entity LocationType : CodeList, managed {
   key code : String(30);
       isTechnical : Boolean default false; // ← Flag for internal/technical locations
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity ExpenseCategory : CodeList {
+entity ExpenseCategory : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity ContractType : CodeList {
+entity ContractType : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity PlatformType : CodeList {
+entity PlatformType : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }
 
 @cds.odata.valuelist
-entity GenreType : CodeList {
+entity GenreType : CodeList, managed {
   key code : String(30);
       name : localized String(100);
 }

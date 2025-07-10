@@ -21,7 +21,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/movie/",
+        "uri": "/movie/",
         "type": "OData",
         "settings": {
           "annotations": [],

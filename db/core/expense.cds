@@ -4,6 +4,7 @@ using { cuid, managed, Currency } from '@sap/cds/common';
 using { com.kartun.movie_studio.ExpenseCategory } from '../codelists';
 using { com.kartun.movie_studio.MovieProject } from './movie';
 
+@cds.persistence.table
 entity Expense : cuid, managed {
   movie       : Association to MovieProject;
   category    : Association to ExpenseCategory;

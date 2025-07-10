@@ -1,7 +1,7 @@
 using com.kartun.movie_studio as M from '../../../db/schema';
 using { Currency, cuid } from '@sap/cds/common';
 
-service BudgetService @(requires: 'authenticated-user'){
+service BudgetService @(path: '/budget', requires: 'authenticated-user'){
 
 //   entity Movies as projection on M.MovieProject;
   entity Assets as projection on M.Asset;

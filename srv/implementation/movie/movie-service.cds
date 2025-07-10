@@ -1,7 +1,7 @@
 using com.kartun.movie_studio as M from '../../../db/schema';
 // using { Currency, cuid } from '@sap/cds/common';
 
-service MovieService {
+service MovieService @(path: '/movie') {
 
   // @odata.draft.enabled: true
   // @cds.redirection.target: true
@@ -10,13 +10,19 @@ service MovieService {
     ID,
     title,
     budget @(assert.range: [0, 1e10]),
+    createdAt,
+    createdBy,
+    director,
+    modifiedAt,
+    modifiedBy,
     releaseDate,
     status.code as status
   }
 
   entity Persons as projection on M.Person {
     ID,
-    name @assert.notNull
+    firstName @assert.notNull,
+    lastName @assert.notNull,
   }
 
   entity Castings as projection on M.Casting;

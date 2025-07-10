@@ -7,7 +7,7 @@
 |**Generation Platform**<br>Visual Studio Code|
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>Local Cap|
-|**Service URL**<br>http://localhost:4004/odata/v4/movie/|
+|**Service URL**<br>http://localhost:4004/movie/|
 |**Module Name**<br>movie_stuidio_ui|
 |**Application Title**<br>Movie studio management|
 |**Namespace**<br>ns|

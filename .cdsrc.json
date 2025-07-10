@@ -140,5 +140,9 @@
     "auth": {
       "kind": "mocked"
     }
+  },
+  "sql": {
+    "native_hana_associations": false,
+    "dialect": "plain"
   }
 } 

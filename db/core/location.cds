@@ -5,6 +5,7 @@ using { com.kartun.movie_studio.Person } from './person';
 // using { com.kartun.movie_studio.LocationAvailabilityStatus } from '../codelists';
 using { com.kartun.movie_studio.LocationType } from '../codelists';
 
+@cds.persistence.table
 entity Location : cuid, managed {
   name           : String(100);
   address        : String(255);
