@@ -9,13 +9,19 @@ service MovieService @(path: '/movie') {
   entity Movies as projection on M.MovieProject {
     ID,
     title,
-    budget @(assert.range: [0, 1e10]),
+    budget @(assert.range: [0, 1e10]),    
+    currency,
+    genre_primary,
+    genre_secondary,
     createdAt,
     createdBy,
     director,
     modifiedAt,
     modifiedBy,
     releaseDate,
+    expenses,
+    castings,
+    productionStatusLogs,
     status.code as status
   }
 

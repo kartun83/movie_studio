@@ -11,19 +11,19 @@ annotate MovieService.Movies with{
     );
     budget @title: 'Budget' @(
         Common: {
-            Text: 'Budget',
-            Label: 'Budget'
+            // Text: 'Budget',
+            Label: '{i18n>budget}'
         }
     );
     releaseDate @title: 'Release Date' @(
         Common: {
-            Text: 'Release Date',
-            Label: 'Release Date'
+            // Text: 'Release Date',
+            Label: '{i18n>releaseDate}'
         }
     );
     status @title: 'Status' @(
         Common: {
-            Text: status,
+            // Text: status,
             Label: 'Status'
         }
     );
@@ -62,7 +62,7 @@ annotate MovieService.Movies with @(
             {
                 $Type: 'UI.DataField',
                 Value: releaseDate,
-                Label: '{i18n>Release Date}'
+                Label: '{i18n>releaseDate}'
             },
             {
                 $Type: 'UI.DataField',
@@ -97,7 +97,7 @@ annotate MovieService.Movies with @(
         Facets: [
             {
                 $Type: 'UI.ReferenceFacet',
-                Label: 'Main',
+                Label: '{i18n>mainMovieInfo}',
                 Target: '@UI.FieldGroup#Main'
             }
         ]
@@ -121,7 +121,7 @@ annotate MovieService.Movies with @(
             {
                 $Type: 'UI.DataField',
                 Value: releaseDate,
-                Label: '{i18n>Release Date}'
+                Label: '{i18n>releaseDate}'
             },
             {
                 $Type: 'UI.DataField',
