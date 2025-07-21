@@ -5,7 +5,11 @@
     "type": "application",
     "i18n": {
       "bundleUrl": "i18n/i18n.properties",
-      "supportedLocales": ["en", "es", "ru"],
+      "supportedLocales": [
+        "en",
+        "es",
+        "ru"
+      ],
       "fallbackLocale": "en"
     },
     "applicationVersion": {
@@ -70,7 +74,11 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "com.kartun.movie_studio.i18n.i18n",
-          "supportedLocales": ["en", "es", "ru"],
+          "supportedLocales": [
+            "en",
+            "es",
+            "ru"
+          ],
           "fallbackLocale": "en"
         }
       },
@@ -87,7 +95,11 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties",
         "settings": {
-          "supportedLocales": ["en", "es", "ru"],
+          "supportedLocales": [
+            "en",
+            "es",
+            "ru"
+          ],
           "fallbackLocale": "en"
         }
       }
@@ -131,7 +143,13 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "condensedTableLayout": true
+                  },
+                  "columns": {
+                    "DataField::status": {
+                      "availability": "Default"
+                    }
                   }
                 }
               }
@@ -145,7 +163,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Movies"
+              "contextPath": "/Movies",
+              "sectionLayout": "Page"
             }
           }
         }

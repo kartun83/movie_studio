@@ -17,6 +17,8 @@ entity MovieProject : cuid, managed {
   status             : Association to ProjectStatus;
   releaseDate        : Date;
   budget             : Decimal(15,2);
+  @ObjectModel.virtualElement: true
+  budget_impact      : Integer;
   currency           : Currency;
   genre_primary      : Association to GenreType;
   genre_secondary    : Association to many MovieGenreSecondary on genre_secondary.movie = $self;
@@ -27,7 +29,7 @@ entity MovieProject : cuid, managed {
   distributionRights : Association to many DistributionRight on distributionRights.movie = $self;
   assets             : Association to many Asset on assets.movie = $self;
   contracts          : Association to many Contract on contracts.movie = $self;
-  productionStatusLogs : Association to many ProductionStatusLog on productionStatusLogs.movie = $self;
+  productionStatusLogs : Composition of many ProductionStatusLog on productionStatusLogs.movie = $self;
 }
 
 entity MovieGenreSecondary {

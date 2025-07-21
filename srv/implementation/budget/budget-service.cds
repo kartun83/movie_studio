@@ -27,5 +27,5 @@ service BudgetService @(path: '/budget', requires: 'authenticated-user'){
   ) returns Decimal(15,2);
 }
 
-annotate BudgetService.Expenses with @odata.draft.enabled;
-annotate BudgetService.Expenses with @fiori.draft.enabled;
+annotate BudgetService.Expenses with @(odata.draft.enabled: true, fiori.draft.enabled);
+// annotate BudgetService.Expenses with @;

@@ -24,14 +24,14 @@ annotate MovieService.Movies with{
     status @title: 'Status' @(
         Common: {
             // Text: status,
-            Label: 'Status'
+            Label: '{i18n>Status}'
         }
     );
     ID @(
         UI.Hidden,
-        Common: {
-            Text: 'description'
-        }
+        // Common: {
+        //     Text: 'description'
+        // }
     );
 
     

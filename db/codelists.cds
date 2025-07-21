@@ -5,7 +5,8 @@ using { sap.common.CodeList, managed } from '@sap/cds/common';
 @cds.odata.valuelist
 entity ProjectStatus : CodeList, managed  {
   key code : String(30);
-      name : localized String(100);
+      criticality : Integer;
+      name : localized String(100);      
 }
 
 @cds.odata.valuelist
