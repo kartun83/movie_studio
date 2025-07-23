@@ -13,10 +13,13 @@ service PersonService {
     agency,
     contactInfo,
     country,
-    languages
+    languages,
+    actions {
+      function getFullName2(person: $self);
+    }
   }
 
-  function getFullName(
+  act getFullName(
     firstName : String,
     lastName : String
   ) returns String;

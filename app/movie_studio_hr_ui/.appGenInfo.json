@@ -1,0 +1,29 @@
+{
+  "generationParameters": {
+    "generationDate": "Wed Jul 23 2025 01:01:36 GMT-0300 (Argentina Standard Time)",
+    "generatorPlatform": "Visual Studio Code",
+    "serviceType": "Local CAP",
+    "metadataFilename": "",
+    "serviceUrl": "http://localhost:4004/hr/",
+    "appName": "movie_studio_hr_ui",
+    "appTitle": "Movie studio HR",
+    "appDescription": "Movie studio HR",
+    "appNamespace": "com.kartun.movie_studio",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.138.0",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": true,
+    "showMockDataInfo": false,
+    "generatorVersion": "1.18.3",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "Person"
+      }
+    ],
+    "launchText": "To launch the generated app, start your CAP project:  and navigate to the following location in your browser:\n\nhttp://localhost:4004/com.kartun.moviestudio.moviestudiohrui/index.html"
+  }
+}

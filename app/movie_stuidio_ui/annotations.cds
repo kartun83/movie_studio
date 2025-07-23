@@ -227,6 +227,39 @@ annotate MovieService.Castings with @(
         characterName,
         isLeadRole,
     ],
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>casting_details}',
+            ID : 'i18ncasting_details',
+            Target : '@UI.FieldGroup#i18ncasting_details',
+        },
+    ],
+    UI.FieldGroup #i18ncasting_details : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : person.firstName,
+                Label : 'firstName',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : person.lastName,
+                Label : 'lastName',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : characterName,
+                Label : 'characterName',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : isLeadRole,
+                Label : 'isLeadRole',
+            },
+        ],
+    },
 );
 
 annotate MovieService.Expenses with @(
@@ -291,6 +324,44 @@ annotate MovieService.Expenses with @(
         description,
         category.name,
     ],
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>expense_details}',
+            ID : 'i18nexpense_details',
+            Target : '@UI.FieldGroup#i18nexpense_details',
+        },
+    ],
+    UI.FieldGroup #i18nexpense_details : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : category_code,
+                Label : 'category_code',
+                ![@UI.Hidden],
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : amount,
+                Label : 'amount',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : currency_code,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : date,
+                Label : 'date',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : description,
+                Label : 'description',
+            },
+        ],
+    },
 );
 // annotate MovieService.ProductionStatusLog with @(
 //     UI.LineItem #i18nproductionLogs : [
@@ -346,5 +417,21 @@ annotate com.kartun.movie_studio.ProductionStatusLog with @(
             Label : '{i18n>description}',
         },        
     ]
+);
+
+annotate MovieService.ProductionStatusLog with @(
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>productionlog_details}',
+            ID : 'i18nproductionlog_details',
+            Target : '@UI.FieldGroup#i18nproductionlog_details',
+        },
+    ],
+    UI.FieldGroup #i18nproductionlog_details : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+        ],
+    }
 );
 

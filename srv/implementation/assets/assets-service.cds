@@ -36,3 +36,5 @@ service AssetsService @(path: '/asset'){
 //       fiori.draft.enabled,
 //       requires: ['AssetManager']);
 //annotate AssetsService.Assets with @fiori.draft.enabled;
+
+annotate AssetsService.Assets with @(odata.draft.enabled:true, fiori.draft.enabled:true);

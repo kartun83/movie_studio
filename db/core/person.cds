@@ -14,6 +14,7 @@ entity Person : cuid, managed {
 //   contactInfo : array of  ContactInfo;
   country     : Country;
   languages   : Composition of many Language on languages.person = $self;
+  virtual fullName : String;
 }
 
 @cds.persistence.table

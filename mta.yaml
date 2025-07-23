@@ -47,9 +47,41 @@ modules:
       - nsmoviestuidioui.zip
       name: nsmoviestuidioui
       target-path: resources/
+    - artifacts:
+      - comkartunmoviestudiomoviestudioassetsui.zip
+      name: comkartunmoviestudiomoviestudioassetsui
+      target-path: resources/
+    - artifacts:
+      - comkartunmoviestudiomoviestudioadmin.zip
+      name: comkartunmoviestudiomoviestudioadmin
+      target-path: resources/
+    - artifacts:
+      - comkartunmoviestudiomoviestudiohrui.zip
+      name: comkartunmoviestudiomoviestudiohrui
+      target-path: resources/
 - name: nsmoviestuidioui
   type: html5
   path: app/movie_stuidio_ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comkartunmoviestudiomoviestudioassetsui
+  type: html5
+  path: app/moviestudio_assets_ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comkartunmoviestudiomoviestudiohrui
+  type: html5
+  path: app/movie_studio_hr_ui
   build-parameters:
     build-result: dist
     builder: custom

@@ -21,3 +21,12 @@ service ConfigService @(path: '/config') @(requires: ['Consultant','authenticate
     entity ProjectStatus as projection on M.ProjectStatus;
     // entity AssetLocations as projection on M.Location;
 }
+
+annotate ConfigService.Genres with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.Departments with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.Roles with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.Locations with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.AssetStatuses with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.ExpenseCategory with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.PlatformType with @(odata.draft.enabled:true, fiori.draft.enabled:true);
+annotate ConfigService.ProjectStatus with @(odata.draft.enabled:true, fiori.draft.enabled:true);

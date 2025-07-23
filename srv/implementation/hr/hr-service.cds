@@ -9,8 +9,12 @@ service HRService @(path: '/hr') {
         birthDate,
         agency,
         contactInfo,
-        country
+        country,
+        fullName,
+        // virtual fullName : String,        
     };
     entity Contract as projection on M.Contract;
     entity PersonRole as projection on M.PersonRole;
 }
+
+annotate HRService.Person with @(odata.draft.enabled:true, fiori.draft.enabled:true);
