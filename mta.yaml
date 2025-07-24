@@ -50,11 +50,7 @@ modules:
     - artifacts:
       - comkartunmoviestudiomoviestudioassetsui.zip
       name: comkartunmoviestudiomoviestudioassetsui
-      target-path: resources/
-    - artifacts:
-      - comkartunmoviestudiomoviestudioadmin.zip
-      name: comkartunmoviestudiomoviestudioadmin
-      target-path: resources/
+      target-path: resources/    
     - artifacts:
       - comkartunmoviestudiomoviestudiohrui.zip
       name: comkartunmoviestudiomoviestudiohrui

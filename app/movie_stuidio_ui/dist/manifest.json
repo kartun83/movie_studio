@@ -122,6 +122,21 @@
           "pattern": "Movies({key}):?query:",
           "name": "MoviesObjectPage",
           "target": "MoviesObjectPage"
+        },
+        {
+          "name": "Movies_expensesObjectPage",
+          "pattern": "Movies({key})/expenses({expensesKey}):?query:",
+          "target": "Movies_expensesObjectPage"
+        },
+        {
+          "name": "Movies_castingsObjectPage",
+          "pattern": "Movies({key})/castings({castingsKey}):?query:",
+          "target": "Movies_castingsObjectPage"
+        },
+        {
+          "name": "Movies_productionStatusLogsObjectPage",
+          "pattern": "Movies({key})/productionStatusLogs({productionStatusLogsKey}):?query:",
+          "target": "Movies_productionStatusLogsObjectPage"
         }
       ],
       "targets": {
@@ -164,7 +179,57 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Movies",
-              "sectionLayout": "Page"
+              "sectionLayout": "Page",
+              "navigation": {
+                "expenses": {
+                  "detail": {
+                    "route": "Movies_expensesObjectPage"
+                  }
+                },
+                "castings": {
+                  "detail": {
+                    "route": "Movies_castingsObjectPage"
+                  }
+                },
+                "productionStatusLogs": {
+                  "detail": {
+                    "route": "Movies_productionStatusLogsObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Movies_expensesObjectPage": {
+          "type": "Component",
+          "id": "Movies_expensesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Movies/expenses"
+            }
+          }
+        },
+        "Movies_castingsObjectPage": {
+          "type": "Component",
+          "id": "Movies_castingsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Movies/castings"
+            }
+          }
+        },
+        "Movies_productionStatusLogsObjectPage": {
+          "type": "Component",
+          "id": "Movies_productionStatusLogsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Movies/productionStatusLogs"
             }
           }
         }
