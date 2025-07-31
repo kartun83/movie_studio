@@ -13,7 +13,8 @@
     "@sap/xssec": "^4",
     "express": "^4",
     "passport": "^0.7.0",
-    "@sap/approuter": "latest"
+    "@sap/approuter": "latest",
+    "mbt": "latest"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.3.0",

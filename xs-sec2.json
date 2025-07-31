@@ -1,0 +1,32 @@
+[36m[cds-plugin-ui5][0m [32m[info][0m Running cds-plugin-ui5@0.9.8 (@sap/cds-dk@9.0.5, @sap/cds@9.0.4)
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.FinancialAnalyst",
+      "description": "FinancialAnalyst"
+    },
+    {
+      "name": "$XSAPPNAME.Consultant",
+      "description": "Consultant"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "FinancialAnalyst",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.FinancialAnalyst"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "Consultant",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Consultant"
+      ],
+      "attribute-references": []
+    }
+  ]
+}
