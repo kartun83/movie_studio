@@ -26,8 +26,10 @@ modules:
           ServiceKeyName: movie_studio_mta-repo-host-key
           sap.cloud.service: movie_studio_mta
         - Authentication: OAuth2UserTokenExchange
-          Name: movie_studio_mta_uaa
-          ServiceInstanceName: movie_studio_mta-xsuaa-service
+          # Name: movie_studio_mta_uaa
+          Name: movie-studio-auth
+          # ServiceInstanceName: movie_studio_mta-xsuaa-service
+          ServiceInstanceName :  movie-studio-auth
           ServiceKeyName: movie-studio-auth-key
           sap.cloud.service: movie_studio_mta
         existing_destinations_policy: update
@@ -109,7 +111,8 @@ resources:
   parameters:
     path: ./xs-security.json
     service: xsuaa
-    service-name: movie_studio-${org}-${space}
+    # service-name: movie_studio-${org}-${space}
+    #service-name: movie_studio_mta-xsuaa-service
     service-plan: application
 - name: movie_studio_mta-repo-host
   type: org.cloudfoundry.managed-service
