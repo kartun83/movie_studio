@@ -1,8 +1,10 @@
 _schema-version: 3.3.0
 ID: movie_studio_mta
 description: Movie studio applcation
-version: 1.0.1
+version: 1.0.5
 modules:
+
+
 - name: movie_studio_mta-destination-content
   type: com.sap.application.content
   requires:
@@ -17,6 +19,7 @@ modules:
     parameters:
       service-key:
         name: movie-studio-auth-key
+
   parameters:
     content:
       instance:
@@ -32,6 +35,7 @@ modules:
           ServiceInstanceName :  movie-studio-auth
           ServiceKeyName: movie-studio-auth-key
           sap.cloud.service: movie_studio_mta
+
         existing_destinations_policy: update
   build-parameters:
     no-source: true
@@ -120,6 +124,7 @@ resources:
     service: html5-apps-repo
     service-name: movie_studio_mta-html5-service
     service-plan: app-host
+
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

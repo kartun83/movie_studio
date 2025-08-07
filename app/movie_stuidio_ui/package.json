@@ -8,6 +8,11 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
+  "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "fallbackLocale": "en",
+      "supportedLocales": ["en", "es", "ru"]
+    },
   "dependencies": {},
   "devDependencies": {
     "@ui5/cli": "^3.0.0",
