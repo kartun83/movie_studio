@@ -32,6 +32,18 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "moviestudio_assets_ui-display": {
+          "semanticObject": "moviestudio_assets_ui",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -73,7 +85,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.kartun.movie_studio.i18n.i18n",
+          "bundleName": "com.kartun.movie_studio.i18n",
           "supportedLocales": [
             "en",
             "es",

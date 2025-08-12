@@ -6,7 +6,11 @@
     "i18n": {
       "bundleUrl": "i18n/i18n.properties",
       "fallbackLocale": "en",
-      "supportedLocales": ["en", "es", "ru"]
+      "supportedLocales": [
+        "en",
+        "es",
+        "ru"
+      ]
     },
     "applicationVersion": {
       "version": "0.0.1"
@@ -26,6 +30,18 @@
         "settings": {
           "annotations": [],
           "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "moviestudio_assets_ui-display": {
+          "semanticObject": "moviestudio_assets_ui",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }

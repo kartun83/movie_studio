@@ -1,130 +1,190 @@
 _schema-version: 3.3.0
-ID: movie_studio_mta
-description: Movie studio applcation
-version: 1.0.5
-modules:
-
-
-- name: movie_studio_mta-destination-content
-  type: com.sap.application.content
-  requires:
-  - name: movie_studio_mta-destination-service
-    parameters:
-      content-target: true
-  - name: movie_studio_mta-repo-host
-    parameters:
-      service-key:
-        name: movie_studio_mta-repo-host-key
-  - name: movie-studio-auth
-    parameters:
-      service-key:
-        name: movie-studio-auth-key
-
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: movie_studio_mta_html_repo_host
-          ServiceInstanceName: movie_studio_mta-html5-service
-          ServiceKeyName: movie_studio_mta-repo-host-key
-          sap.cloud.service: movie_studio_mta
-        - Authentication: OAuth2UserTokenExchange
-          # Name: movie_studio_mta_uaa
-          Name: movie-studio-auth
-          # ServiceInstanceName: movie_studio_mta-xsuaa-service
-          ServiceInstanceName :  movie-studio-auth
-          ServiceKeyName: movie-studio-auth-key
-          sap.cloud.service: movie_studio_mta
-
-        existing_destinations_policy: update
-  build-parameters:
-    no-source: true
-- name: movie_studio_mta-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: movie_studio_mta-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
-    requires:
-    - artifacts:
-      - nsmoviestuidioui.zip
-      name: nsmoviestuidioui
-      target-path: resources/
-    - artifacts:
-      - comkartunmoviestudiomoviestudioassetsui.zip
-      name: comkartunmoviestudiomoviestudioassetsui
-      target-path: resources/    
-    - artifacts:
-      - comkartunmoviestudiomoviestudiohrui.zip
-      name: comkartunmoviestudiomoviestudiohrui
-      target-path: resources/
-- name: nsmoviestuidioui
-  type: html5
-  path: app/movie_stuidio_ui
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: comkartunmoviestudiomoviestudioassetsui
-  type: html5
-  path: app/moviestudio_assets_ui
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: comkartunmoviestudiomoviestudiohrui
-  type: html5
-  path: app/movie_studio_hr_ui
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: movie_studio_mta-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
-        instance:
-          destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: movie_studio_mta-destination-service
-    service-plan: lite
-- name: movie-studio-auth
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    # service-name: movie_studio-${org}-${space}
-    #service-name: movie_studio_mta-xsuaa-service
-    service-plan: application
-- name: movie_studio_mta-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: movie_studio_mta-html5-service
-    service-plan: app-host
-
+ID: movie_studio
+version: 1.1.5
+description: "Movie studio management app."
 parameters:
-  deploy_mode: html5-repo
   enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: movie_studio-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: movie_studio-connectivity
+      - name: movie_studio-destination
+      - name: movie_studio-db
+      - name: movie_studio-auth
+
+  - name: movie_studio-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: movie_studio-db
+
+  - name: movie_studio-app-deployer
+    type: com.sap.application.content
+    path: gen
+    requires:
+      - name: movie_studio-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: movie_studiomovie_studio_hr_ui
+          artifacts:
+            - movie_studio_hr_ui.zip
+          target-path: app/
+        - name: movie_studiomovie_stuidio_ui
+          artifacts:
+            - movie_stuidio_ui.zip
+          target-path: app/
+        - name: movie_studiomoviestudio_assets_ui
+          artifacts:
+            - moviestudio_assets_ui.zip
+          target-path: app/
+
+  - name: movie_studiomovie_studio_hr_ui
+    type: html5
+    path: app/movie_studio_hr_ui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: movie_studiomovie_stuidio_ui
+    type: html5
+    path: app/movie_stuidio_ui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: movie_studiomoviestudio_assets_ui
+    type: html5
+    path: app/moviestudio_assets_ui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+
+  - name: movie_studio-destinations
+    type: com.sap.application.content
+    requires:
+      - name: movie_studio-auth
+        parameters:
+          service-key:
+            name: movie_studio-auth-key
+      - name: movie_studio-html5-repo-host
+        parameters:
+          service-key:
+            name: movie_studio-html5-repo-host-key
+      - name: srv-api
+      - name: movie_studio-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: movie_studio-html5-repository
+              ServiceInstanceName: movie_studio-html5-repo-host
+              ServiceKeyName: movie_studio-html5-repo-host-key
+              sap.cloud.service: movie_studio.service
+            - Name: movie_studio-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: movie_studio-auth
+              ServiceKeyName: movie_studio-auth-key
+              sap.cloud.service: movie_studio.service
+
+resources:
+  - name: movie_studio-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+  - name: movie_studio-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: srv-api
+                URL: ~{srv-api/srv-url}
+                Authentication: NoAuthentication
+                Type: HTTP
+                ProxyType: Internet
+                HTML5.ForwardAuthToken: true
+                HTML5.DynamicDestination: true
+              - Name: ui5
+                URL: https://ui5.sap.com
+                Authentication: NoAuthentication
+                Type: HTTP
+                ProxyType: Internet
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+  - name: movie_studio-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: movie_studio-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: movie_studio-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+  - name: movie_studio-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: movie_studio-${org}-${space}
+        tenant-mode: dedicated
